@@ -5,7 +5,7 @@
 <div id="menu-bar">
 	<ul id="menu">
   <li>
-    <div><span class="ui-icon ui-icon-disk"></span>Início</div>
+    <div id="menu-home"><span class="ui-icon ui-icon-disk"></span>Início</div>
   </li>
   <li>
     <div><span class="ui-icon ui-icon-zoomin"></span>Zoom In</div>
@@ -40,6 +40,14 @@
 	
 </div>
 
-<div id="content"></div>
+<c:url var="listItens" value="/admin/ListItens.action" />
+<script>
+	var listItensPath = "${listItens}";
+</script>
+<div id="content">
+
+
+
+</div>
 
 <%@include file="footer.jsp" %>
