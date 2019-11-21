@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+
+<!DOCTYPE hibernate-mapping PUBLIC
+      "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+          "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+        
+<hibernate-mapping package="br.com.javamon.entity">
+	
+	<class name="EntryFile" table="entry_file">
+		
+		<id name="id">
+			<generator class="native"/>
+		</id>
+		
+		<many-to-one name="entry" column="entry_id"/>
+		
+		<property name="file"/>
+		
+		<property name="fileName"/>
+		
+	</class>
+	
+</hibernate-mapping>
+   

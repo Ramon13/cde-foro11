@@ -1,0 +1,24 @@
+#top-menu { 
+	overflow: hidden;
+	background-color: #002db3;
+	margin: 0;
+	padding-right: 100%;
+    padding-bottom: 2%;
+	list-style-type: none;
+	margin-bottom: 10px;
+}
+
+#top-menu h1{
+	font-family: "Segoe UI", Frutiger, "Frutiger Linotype", "Dejavu Sans", "Helvetica Neue", Arial, sans-serif;
+    font-size: 14px;
+    position: absolute;
+    padding: 2px;
+    font-style: normal;
+    font-variant: normal;
+    font-weight: 700;
+    color: white;
+}
+
+#pendingOrder {
+	color: yellow;
+}

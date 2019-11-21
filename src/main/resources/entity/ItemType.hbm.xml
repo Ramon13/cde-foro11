@@ -1,0 +1,28 @@
+<?xml version="1.0"?>
+
+<!DOCTYPE hibernate-mapping PUBLIC
+      "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+          "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+             
+<hibernate-mapping package="br.com.javamon.entity">
+	
+	<class name="ItemType" table="item_type" lazy="false">
+		<id name="id">
+			<generator class="native"/>
+		</id>
+		
+		<property name="description" not-null="true" lazy="false" unique="true"/>
+		
+		<many-to-one name="subitem" column="subitem_id" not-null="false"/>
+		
+		<set name="itens" table="item" cascade="delete"
+			lazy="true" inverse="true" fetch="select">
+			<key>
+				<column name="type_id" not-null="true"/>
+			</key>
+			<one-to-many class="br.com.javamon.entity.Item"/>
+		</set>
+	</class>
+	
+</hibernate-mapping>
+   

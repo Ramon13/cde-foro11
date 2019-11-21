@@ -1,0 +1,35 @@
+<?xml version="1.0"?>
+
+<!DOCTYPE hibernate-mapping PUBLIC
+      "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+          "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+        
+<hibernate-mapping package="br.com.javamon.entity">
+	
+	<class name="Entry" table="entry">
+		
+		<id name="id">
+			<generator class="native"/>
+		</id>
+		
+		<many-to-one name="item" column="item_id"/>
+		<property name="amount" not-null="true" />
+		<property name="unityValue" not-null="true" />
+		<property name="total" not-null="true" />
+		<property name="date" not-null="true" />
+		<many-to-one name="provider" not-null="false" />
+		
+		
+		<one-to-one name="document" class="br.com.javamon.entity.Document" constrained="true"></one-to-one>
+				
+		<set name="files" table="entry_files" cascade="delete" inverse="true" fetch="select">
+			<key>
+				<column name="entry_id" not-null="true"/>
+			</key>
+			<one-to-many class="br.com.javamon.entity.EntryFile"/>
+		</set>
+		
+	</class>
+	
+</hibernate-mapping>
+   

@@ -1,0 +1,28 @@
+<?xml version="1.0"?>
+
+<!DOCTYPE hibernate-mapping PUBLIC
+      "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+          "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+              
+<hibernate-mapping package="br.com.javamon.entity">
+	
+	<class name="Cart" table="shopping_cart">
+		
+		<id name="id">
+		</id>
+			
+		<set name="cartItens" table="order_item_cart" cascade="all"
+			inverse="false" lazy="true" fetch="select">
+			<key>
+				<column name="cart_id" not-null="true"/>
+			</key>
+			<many-to-many entity-name="br.com.javamon.entity.OrderItem">
+				<column name="order_item_id" not-null="true"/>
+			</many-to-many>
+		</set>
+	
+		<one-to-one name="login" class="br.com.javamon.entity.Login"></one-to-one>			
+	</class>
+	
+</hibernate-mapping>
+   

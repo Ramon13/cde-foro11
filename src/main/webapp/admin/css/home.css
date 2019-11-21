@@ -1,0 +1,12 @@
+.ui-menu { width: 150px; }
+
+#menu-bar{
+	float: left;
+}
+
+#content{
+	background-color: blue;
+	padding-bottom: 100%;
+    padding-right: 90%;
+    float: right;
+}

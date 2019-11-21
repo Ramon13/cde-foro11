@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+
+<!DOCTYPE hibernate-mapping PUBLIC
+      "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+          "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+        
+<hibernate-mapping package="br.com.javamon.entity">
+	
+	<class name="ItemImage" table="item_image">
+		
+		<id name="id">
+			<generator class="native"/>
+		</id>
+		
+		<many-to-one name="item" column="item_id"/>
+		
+		<property name="path"/>
+		
+	</class>
+	
+</hibernate-mapping>
+   

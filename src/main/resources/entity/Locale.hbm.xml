@@ -1,0 +1,29 @@
+<?xml version="1.0"?>
+
+<!DOCTYPE hibernate-mapping PUBLIC
+      "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+          "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+        
+<hibernate-mapping package="br.com.javamon.entity">
+	
+	<class name="Locale" table="locale">
+		
+		<id name="id">
+			<generator class="native"/>
+		</id>
+		
+		<property name="description" type="java.lang.String">
+			<column name="description" not-null="true" unique="true"/>
+		</property>
+		
+		<set name="accounts" table="login"
+			inverse="true" lazy="true" fetch="select">
+			<key>
+				<column name="locale_id" not-null="true"/>
+			</key>
+			<one-to-many class="br.com.javamon.entity.Login"/>
+		</set>
+	</class>
+	
+</hibernate-mapping>
+   

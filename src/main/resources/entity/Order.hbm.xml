@@ -1,0 +1,36 @@
+<?xml version="1.0"?>
+
+<!DOCTYPE hibernate-mapping PUBLIC
+      "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+          "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+              
+<hibernate-mapping package="br.com.javamon.entity">
+	
+	<class name="Order" table="pedido">
+		
+		<id name="id">
+			<generator class="native"/>
+		</id>
+		
+		<property name="date"  not-null="true" />
+		
+		<property name="releaseDate" not-null="false" />
+		
+		<many-to-one name="login" column="login_id" class="br.com.javamon.entity.Login"/>
+		
+		<property name="status" not-null="true" />
+		
+		<property name="receivedUser"/>
+		
+		<set name="orderItens" table="order_item" cascade="delete"
+			inverse="true" lazy="true" fetch="select">
+			<key>
+				<column name="order_id" not-null="true"/>
+			</key>
+			<one-to-many class="br.com.javamon.entity.OrderItem"/>
+		</set>
+		
+	</class>
+	
+</hibernate-mapping>
+   

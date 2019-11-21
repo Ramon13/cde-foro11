@@ -1,0 +1,37 @@
+<?xml version="1.0"?>
+
+<!DOCTYPE hibernate-mapping PUBLIC
+      "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+          "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+        
+<hibernate-mapping package="br.com.javamon.entity">
+	
+	<class name="Login" table="login">
+		
+		<id name="id">
+			<generator class="native"/>
+		</id>
+		
+		<property name="user" not-null="true" unique="true"/>
+		
+		<property name="readjustToCart">
+			<column name="readjust_to_cart" default="false"/>
+		</property>
+		
+		<property name="password" not-null="true"/>
+		
+		<many-to-one name="permission" column="permission_id" lazy="false"/>
+		<many-to-one name="locale" column="locale_id"/>
+		
+		<set name="orders" table="order" inverse="true" lazy="true" fetch="select">
+			<key>
+				<column name="login_id" not-null="true"/>
+			</key>
+			<one-to-many class="br.com.javamon.entity.Order"/>
+		</set>
+		
+		<one-to-one name="cart" class="br.com.javamon.entity.Cart"></one-to-one>
+	</class>
+	
+</hibernate-mapping>
+   
