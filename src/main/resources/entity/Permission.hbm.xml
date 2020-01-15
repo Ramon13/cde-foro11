@@ -14,6 +14,13 @@
 		
 		<property name="description" not-null="true" unique="true"/>
 		
+		<set name="accounts" table="login"
+			inverse="true" lazy="true" fetch="select">
+			<key>
+				<column name="permission_id" not-null="true"/>
+			</key>
+			<one-to-many class="br.com.javamon.entity.Login"/>
+		</set>
 	</class>
 	
 </hibernate-mapping>

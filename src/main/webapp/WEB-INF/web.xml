@@ -9,6 +9,10 @@
 
   <display-name>Controle De Estoque - Foro Da 11 CJM</display-name>
   
+  <welcome-file-list>
+  	<welcome-file>index.jsp</welcome-file>
+  </welcome-file-list>
+  
   <servlet>
   	<display-name>ControllerServlet</display-name>
   	<servlet-name>ControllerServlet</servlet-name>
@@ -18,5 +22,13 @@
   	<servlet-name>ControllerServlet</servlet-name>
   	<url-pattern>*.action</url-pattern>
   </servlet-mapping>
+  
+  <jsp-config>
+    <jsp-property-group>
+        <url-pattern>*.jsp</url-pattern>
+        <page-encoding>UTF-8</page-encoding>
+    </jsp-property-group>
+</jsp-config>
+  
 
 </web-app>

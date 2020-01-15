@@ -50,6 +50,14 @@
 			<one-to-many class="br.com.javamon.entity.OrderItem"/>
 		</set>
 		
+		<set name="entryItens" table="entry_item" cascade="delete"
+			inverse="true" lazy="true" fetch="select" >
+			<key>
+				<column name="item_id" not-null="true"/>
+			</key>
+			<one-to-many class="br.com.javamon.entity.EntryItem"/>
+		</set>
+		
 	</class>
 	
 </hibernate-mapping>

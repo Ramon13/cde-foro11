@@ -1,53 +1,117 @@
-<%@page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+<%@page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@include file="header.jsp" %>
+<%@include file="header.jsp"%>
 
-<div id="menu-bar">
-	<ul id="menu">
-  <li>
-    <div id="menu-home"><span class="ui-icon ui-icon-disk"></span>Início</div>
-  </li>
-  <li>
-    <div><span class="ui-icon ui-icon-zoomin"></span>Zoom In</div>
-  </li>
-  <li>
-    <div><span class="ui-icon ui-icon-zoomout"></span>Zoom Out</div>
-  </li>
-  <li class="ui-state-disabled">
-    <div><span class="ui-icon ui-icon-print"></span>Print...</div>
-  </li>
-  <li>
-    <div>Playback</div>
-    <ul>
-      <li>
-        <div><span class="ui-icon ui-icon-seek-start"></span>Prev</div>
-      </li>
-      <li>
-        <div><span class="ui-icon ui-icon-stop"></span>Stop</div>
-      </li>
-      <li>
-        <div><span class="ui-icon ui-icon-play"></span>Play</div>
-      </li>
-      <li>
-        <div><span class="ui-icon ui-icon-seek-end"></span>Next</div>
-      </li>
-    </ul>
-  </li>
-  <li>
-    <div>Learn more about this menu</div>
-  </li>
-</ul>
-	
-</div>
+	<div id="menu-bar">
+		<ul id="menu">
 
-<c:url var="listItens" value="/admin/ListItens.action" />
+			<c:set var="divTabId" value="content" />
+			<li>
+				<c:url var="listItensPath" value="/admin/ListItens.action">
+					<c:param name="resetFilters" value="true" />
+				</c:url>
+				<div onclick="callMenu('${listItensPath}', '${divTabId}')">
+					<span class="ui-icon ui-icon-home"></span>Início
+				</div></li>
+			<li class="ui-state-disabled">
+				<div>
+					<span class="ui-icon ui-icon-print"></span>Print...
+				</div>
+			</li>
+
+			<li>
+				<div>Pedidos</div>
+				<ul>
+					<li>
+						<c:url var="listOrdersPath"
+							value="/admin/ListOrders.action">
+							<c:param name="resetFilters" value="true" />
+							<c:param name="orderType" value="pending" />
+						</c:url>
+						<div onclick="callMenu('${listOrdersPath}', '${divTabId}')">
+							<span></span>Pendentes
+						</div></li>
+					<li>
+						<c:url var="listOrdersPath"
+							value="/admin/ListOrders.action">
+							<c:param name="resetFilters" value="true" />
+							<c:param name="orderType" value="released" />
+						</c:url>
+						<div onclick="callMenu('${listOrdersPath}', '${divTabId}')">
+							<span></span>Autorizados
+						</div></li>
+					<li>
+						<c:url var="listOrdersPath"
+							value="/admin/ListOrders.action">
+							<c:param name="resetFilters" value="true" />
+							<c:param name="orderType" value="finalized" />
+						</c:url>
+						<div onclick="callMenu('${listOrdersPath}', '${divTabId}')">
+							<span></span>Finalizados
+						</div></li>
+					<li>
+						<c:url var="listOrdersPath"
+							value="/admin/ListOrders.action">
+							<c:param name="resetFilters" value="true" />
+							<c:param name="orderType" value="canceled_by_admin" />
+						</c:url>
+						<div onclick="callMenu('${listOrdersPath}', '${divTabId}')">
+							<span></span>Cancelados Pelo Administrador
+						</div>
+					</li>
+					<li>
+						<c:url var="listOrdersPath"
+							value="/admin/ListOrders.action">
+							<c:param name="resetFilters" value="true" />
+							<c:param name="orderType" value="canceled_by_user" />
+						</c:url>
+						<div onclick="callMenu('${listOrdersPath}', '${divTabId}')">
+							<span></span>Cancelados Pelo Usuário
+						</div>
+					</li>
+				</ul>
+			</li>
+			<li>
+				<c:url var="listLoginsPath" value="/admin/ListLogins.action">
+					<c:param name="resetFilters" value="true" />
+				</c:url>
+				<div onclick="callMenu('${listLoginsPath}', '${divTabId}')">
+					<span class="ui-icon ui-icon-person"></span>Usuários do sistema
+				</div>
+			</li>
+			<li>
+				<c:url var="listEntriesPath"
+					value="/admin/ListEntries.action">
+					<c:param name="resetFilters" value="true" />
+				</c:url>
+				<div onclick="callMenu('${listEntriesPath}', '${divTabId}')">
+					<span class="ui-icon ui-icon-circle-arrow-s"></span>Entradas
+				</div>
+			</li>
+			<li>
+				<c:url var="logoffAction" value="/auth/Logoff.action" />
+				<div onclick="logoff('${logoffAction}')">
+					<span class="ui-icon ui-icon-circle-arrow-s"></span>Sair
+				</div>
+			</li>
+
+		</ul>
+
+	</div>
+
+	<div id="pageOptions">
+		<c:url value="/admin/ReturnPage.action" var="returnPage" />
+		<a href="#" onclick="returnPage('${returnPage}', 'content')">
+			<img id="backArrowPage" src="../img/png/back-arrow.png">
+		</a>
+	</div>
+	<div id="content"></div>
+
+
+<%@include file="footer.jsp"%>
+
 <script>
-	var listItensPath = "${listItens}";
+	$(document).ready(function() {
+		callMenu('${listItensPath}', '${divTabId}');
+	});
 </script>
-<div id="content">
-
-
-
-</div>
-
-<%@include file="footer.jsp" %>

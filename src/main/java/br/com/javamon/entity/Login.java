@@ -69,6 +69,7 @@ public class Login {
 	public void setCart(Cart cart) {
 		this.cart = cart;
 	}
-	
-	
+	public String getDescription() {
+		return user;
+	}
 }

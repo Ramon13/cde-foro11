@@ -10,5 +10,11 @@
 	</footer>
 	
 	<%@include file="required-js.html" %>
-	<script type="text/javascript" src="/cde-foro11/admin/js/home.js"></script>
+	<script type="text/javascript" src="../js/global.js"></script>
+	<script type="text/javascript" src="../js/home.js"></script>
+	<script type="text/javascript" src="../js/list-itens.js"></script>
+	<script type="text/javascript" src="../js/item.js"></script>
+	<script type="text/javascript" src="../js/orders.js"></script>
+	<script type="text/javascript" src="../js/entries.js"></script>
+	
 </html>

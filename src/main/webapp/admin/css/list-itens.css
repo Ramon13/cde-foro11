@@ -1,0 +1,153 @@
+.ui-menu { width: 150px; }
+
+#itens-table{
+	font-family: arial, sans-serif;
+    border-collapse: collapse;
+    width: 100%;
+}
+
+#itens-table td{
+	font-size: 14px;
+	 border: 1px solid #dddddd;
+    text-align: center;
+    padding-right: 8px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+   	align-items: center;
+   	text-align: center;
+}
+
+#itens-table th{
+	font-size: 14px;
+	 border: 1px solid #dddddd;
+    text-align: center;
+    padding-right: 8px;
+    padding-top: 70px;
+    padding-bottom: 5px;
+   	align-items: center;
+   	text-align: center;
+}
+
+#itens-table tbody:nth-child(even) {
+    background-color: #d3d7cf;
+}
+
+.table-header1 {
+	padding-bottom: 50px;
+}
+
+.verticalTableHeader {
+    transform: rotate(270deg);
+	width: 20px;
+	white-space: nowrap;
+}
+
+/*Scrollable menu*/
+.vertical-menu {
+  width: 300px;
+  height: 150px;
+  overflow-y: auto;
+}
+
+.vertical-menu a {
+  background-color: #eee;
+  color: black;
+  display: block;
+  padding: 0px;
+  text-decoration: none;
+}
+
+.vertical-menu a:hover {
+  background-color: #ccc;
+}
+
+.vertical-menu a.active {
+  background-color: #4CAF50;
+  color: white;
+}
+
+#itens-table .show-item-info{
+	padding: 0px;
+}
+
+#testDiv{
+	width: 300px;
+	background-color: blue;
+}
+
+.selected-list-type-img{
+	text-align: center;
+    float: right;
+    background-color: #ced0cb;
+    border-radius: 360px;
+}
+
+.list-type-img{
+	text-align: center;
+    float: right;
+    border-radius: 360px;
+}
+
+#grid-type-img{
+	    width: 20px;
+    padding: 10px;
+}
+
+#list-type-img{
+	width: 20px;
+    padding: 10px;
+}
+
+#card{
+	border: 1px solid #e7e7e7;
+	border-radius: 8px;
+	padding-bottom: 20px;
+}
+
+.item-image-div{
+	min-width: 200px;
+	min-height: 200px;
+	margin-top: 10px;
+	text-align: center; 
+}
+
+.item-image{
+	max-width: 200px;
+	max-height: 200px;
+	text-align: center;
+}
+
+.item-description{
+	text-align: center;
+}
+
+.item-description a{
+	font-size: 12px;
+    font-family: Arial,Helvetica,sans-serif;
+    color: #05529c;
+    text-decoration: none;
+    letter-spacing: .3px;
+    padding: 8px;
+    font-weight: 400;
+}
+
+.user-shopping{
+	clear: both;
+}
+
+.user-shopping tr td{
+	border: none;
+}
+
+.user-shopping td {
+	border-collapse: collapse;
+    padding-bottom: 64px;
+}
+
+.unavaliable-in-stock{
+	font-size: 12px;
+    font-family: Arial,Helvetica,sans-serif;
+    color: #ef2929;
+    letter-spacing: .3px;
+}
+

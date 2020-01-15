@@ -1,0 +1,68 @@
+.item-title{
+	font-family: 'Google Sans',Roboto,RobotoDraft,Helvetica,Arial,sans-serif;
+    font-size: 1.375rem;
+}
+
+.tab-h3{
+	font-size: 12px;
+}
+
+#entries-table table{
+	font-family: arial, sans-serif;
+    border-collapse: collapse;
+    width: 100%;
+}
+
+#entries-table table td{
+	font-size: 14px;
+	 border: 1px solid #dddddd;
+    text-align: center;
+    padding-right: 8px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+   	align-items: center;
+   	text-align: center;
+}
+
+#entries-table table th{
+	font-size: 14px;
+	 border: 1px solid #dddddd;
+    text-align: center;
+    padding-right: 8px;
+    padding-top: 10px;
+    padding-bottom: 5px;
+   	align-items: center;
+   	text-align: center;
+}
+
+#entries-table tbody:nth-child(even) {
+    background-color: #d3d7cf;
+}
+
+#childItemOrderThead th{
+	background: black;
+	color: white;
+}
+
+#childOrderTbody td{
+	background: white;
+	color: black;
+}
+
+#orderLink{
+	color: blue;
+}
+
+#itemInfoTb{
+	text-align: center;
+}
+
+#childEntryThead th{
+	background: black;
+	color: white;
+}
+
+#childEntryTbody td{
+	background: white;
+	color: black;
+}

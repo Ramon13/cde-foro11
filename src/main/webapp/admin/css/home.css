@@ -1,12 +1,18 @@
 .ui-menu { width: 150px; }
+body{
+	margin: 0px;
+}
 
 #menu-bar{
 	float: left;
+	margin: 5px;
+	height: 300px;
 }
 
-#content{
-	background-color: blue;
-	padding-bottom: 100%;
-    padding-right: 90%;
-    float: right;
+.ui-widget.ui-widget-content{
+	border: none;
+}
+
+#backArrowPage{
+	width: 15px;
 }

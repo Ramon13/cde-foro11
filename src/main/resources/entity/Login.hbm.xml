@@ -20,7 +20,8 @@
 		
 		<property name="password" not-null="true"/>
 		
-		<many-to-one name="permission" column="permission_id" lazy="false"/>
+		<many-to-one name="permission" column="permission_id"/>
+		
 		<many-to-one name="locale" column="locale_id"/>
 		
 		<set name="orders" table="order" inverse="true" lazy="true" fetch="select">

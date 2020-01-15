@@ -1,0 +1,79 @@
+#orders-table{
+	height: 90vh;
+	overflow: auto;
+}
+
+#orders-table table{
+	font-family: arial, sans-serif;
+    border-collapse: collapse;
+    width: 100%;
+}
+
+#orders-table table td{
+	font-size: 14px;
+	 border: 1px solid #dddddd;
+    text-align: center;
+    padding-right: 8px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+   	align-items: center;
+   	text-align: center;
+}
+
+#orders-table table th{
+	font-size: 14px;
+	 border: 1px solid #dddddd;
+    text-align: center;
+    padding-right: 8px;
+    padding-top: 10px;
+    padding-bottom: 5px;
+   	align-items: center;
+   	text-align: center;
+}
+
+#orders-table tbody:nth-child(even) {
+    background-color: #dddddd;
+}
+
+/*drop down menu*/
+/* Dropdown Button */
+.dropbtn {
+ max-width: 18px;
+}
+
+/* The container <div> - needed to position the dropdown content */
+.dropdown {
+  position: relative;
+}
+
+/* Dropdown Content (Hidden by Default) */
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #f1f1f1;
+  min-width: 160px;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index: 1;
+  padding: 10px;
+}
+
+/* Links inside the dropdown */
+.dropdown-content span {
+  color: black;
+  padding: 3px 16px;
+  text-decoration: none;
+  display: block;
+}
+
+/* Change color of dropdown links on hover */
+.dropdown-content span:hover {background-color: #ddd;}
+
+/* Show the dropdown menu on hover */
+.dropdown:hover .dropdown-content {display: block;}
+
+/* Change the background color of the dropdown button when the dropdown content is shown */
+.dropdown:hover .dropbtn {background-color: #3e8e41;}
+
+.dropbtn{
+	width: 10px;
+}

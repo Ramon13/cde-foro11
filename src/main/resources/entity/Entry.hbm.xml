@@ -18,17 +18,15 @@
 		<property name="total" not-null="true" />
 		<property name="date" not-null="true" />
 		<many-to-one name="provider" not-null="false" />
+		<one-to-one name="document" cascade="delete" class="br.com.javamon.entity.Document" constrained="true"></one-to-one>
 		
-		
-		<one-to-one name="document" class="br.com.javamon.entity.Document" constrained="true"></one-to-one>
-				
-		<set name="files" table="entry_files" cascade="delete" inverse="true" fetch="select">
+		<set name="entryItens" table="entry_item" cascade="delete"
+			inverse="true" lazy="true" fetch="select">
 			<key>
 				<column name="entry_id" not-null="true"/>
 			</key>
-			<one-to-many class="br.com.javamon.entity.EntryFile"/>
+			<one-to-many class="br.com.javamon.entity.EntryItem"/>
 		</set>
-		
 	</class>
 	
 </hibernate-mapping>

@@ -1,0 +1,25 @@
+<?xml version="1.0"?>
+
+<!DOCTYPE hibernate-mapping PUBLIC
+      "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+          "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+              
+<hibernate-mapping package="br.com.javamon.entity">
+	
+	<class name="EntryItem" table="entry_item">
+		
+		<id name="id">
+			<generator class="native"/>
+		</id>
+			
+		<many-to-one name="item" column="item_id" class="br.com.javamon.entity.Item"/>
+		<property name="amount" not-null="true" />
+		<property name="unityValue" not-null="true" />
+		<property name="total" not-null="true" />
+		
+		<many-to-one name="entry" column="entry_id" class="br.com.javamon.entity.Entry"/>
+		
+	</class>
+	
+</hibernate-mapping>
+   

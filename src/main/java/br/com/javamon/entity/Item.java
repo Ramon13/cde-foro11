@@ -10,12 +10,15 @@ public class Item {
 	private String description;
 	private UnityType unityType;
 	private Subitem subitem;
+	
+	@Deprecated
+	private Set<Entry> entries = new HashSet<>();
 	private ItemType type;
 	private Long currentAmount;
 	private Blob specification;
 	private Long mainImage;
 	private Set<ItemImage> images = new HashSet<>();
-	private Set<Entry> entries = new HashSet<>();
+	private Set<EntryItem> entryItens = new HashSet<>();
 	private Set<OrderItem> orderItens = new HashSet<>();
 	
 	public Long getId() {
@@ -48,12 +51,6 @@ public class Item {
 	public void setImages(Set<ItemImage> images) {
 		this.images = images;
 	}
-	public Set<Entry> getEntries() {
-		return entries;
-	}
-	public void setEntries(Set<Entry> entries) {
-		this.entries = entries;
-	}
 	public UnityType getUnityType() {
 		return unityType;
 	}
@@ -84,4 +81,17 @@ public class Item {
 	public void setMainImage(Long mainImage) {
 		this.mainImage = mainImage;
 	}
+	public Set<EntryItem> getEntryItens() {
+		return entryItens;
+	}
+	public void setEntryItens(Set<EntryItem> entryItens) {
+		this.entryItens = entryItens;
+	}
+	public Set<Entry> getEntries() {
+		return entries;
+	}
+	public void setEntries(Set<Entry> entries) {
+		this.entries = entries;
+	}
+
 }
