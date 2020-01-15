@@ -18,11 +18,27 @@ public class ProviderService extends Service {
 		}
 	}
 	
+	public void save(Provider p) throws ServiceException{
+		try {
+			getDaoFactory().getDAO(ProviderDAO.class).save(p);
+		} catch (DAOException e) {
+			throw new ServiceException(e);
+		}
+	}
+	
 	public List<Long> getProviderIds() throws ServiceException{
 		List<Long> providerIdList = new ArrayList<>();
 		for(Provider provider : list()){
 			providerIdList.add(provider.getId());
 		}
 		return providerIdList;
+	}
+	
+	public boolean isDescriptionExists(String providerDescription) throws ServiceException{
+		try {
+			return getDaoFactory().getDAO(ProviderDAO.class).isDescriptionExists(providerDescription);
+		} catch (DAOException e) {
+			throw new ServiceException(e);
+		}
 	}
 }

@@ -40,7 +40,7 @@ public abstract class AdminAction <T extends FilterProperties> extends Action{
 			
 
 			processAction();
-		} catch (FilterException | SearchException | ServiceException e) {
+		} catch (FilterException | SearchException | ServiceException| ValidatorException e) {
 			getResponse().setStatus(230);
 			getResponse().getOutputStream().print(e.getMessage());
 			e.printStackTrace();
