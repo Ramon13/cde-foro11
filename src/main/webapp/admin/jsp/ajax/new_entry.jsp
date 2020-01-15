@@ -3,11 +3,11 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@taglib prefix="number" uri="/WEB-INF/number-tag.tld"%>
 
-<script>
-	$(document).ready(function() {
-	    $('.js-example-basic-single').select2();
-	});
-</script>
+<c:url value="/admin/AddProvider.action" var="getProviderPage"/>
+<c:url value="/admin/AddProvider.action" var="saveProvider">
+	<c:param name="save" value="true"/>
+</c:url>
+
 
 <form>
 	<div>
@@ -43,7 +43,12 @@
 								<c:forEach var="provider" items="${providers}">	
 									<option value="${provider.id }"> ${provider.description }</option>
 								</c:forEach>
-							</select> 
+							</select>
+							
+							<div id="addProviderBtn"><span class="ui-icon ui-icon-plus"></span></div>
+							<div id="editProviderBtn"><span class="ui-icon ui-icon-pencil"></span></div>
+							<div id="deleteProviderBtn"><span class="ui-icon ui-icon-close"></span></div>
+							
 						</div>
 					</div>
 				</td>
@@ -100,9 +105,11 @@
 								language="pt">${requestScope.entry.total }</number:format>" />
 					</td>
 				</tr>
-				 
 			</table>
-					
+			
+			<input id="totalTable" hidden="hidden" disabled="disabled" type="text" name="total" autocomplete="off"
+							value="<number:format country="BR" 
+								language="pt">${requestScope.entry.total }</number:format>" />
 		</div>
 		
 		<div id="addEntryOptions">
@@ -118,7 +125,7 @@
 </form>
 
 
- <c:url value="/admin/add_provider.action" var="addProvider"/>
+ 
  <c:url value="/admin/edit_provider.action" var="editProvider"/>
  <c:url value="/admin/delete_provider.action" var="deleteProvider"/>
  
@@ -139,3 +146,34 @@
 </div>	
 
 
+<script>
+var dialog;
+	$(document).ready(function(){
+		$('.js-example-basic-single').select2();
+		
+		//open provider add dialog
+		$("#addProviderBtn").on("click", function(){
+			dialog.dialog( "open" );
+			ajaxCall('${getProviderPage}', "dialog-form");
+		});
+		
+		//provider add dialog
+		dialog = $( "#dialog-form" ).dialog({
+			autoOpen: false,
+			height: 400,
+			width: 350,
+			modal: true,
+			buttons: {
+			  "Criar": function(){
+				  addProvider('${saveProvider}', dialog);
+			  },	
+			  "Cancelar": function() {
+			    dialog.dialog( "close" );
+			  }
+			},
+			close: function() {
+			 $("#dialog-error-msg").html(" ");
+			}
+		 });
+	});
+</script>

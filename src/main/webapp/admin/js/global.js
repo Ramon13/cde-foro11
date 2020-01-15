@@ -27,7 +27,6 @@ function ajaxListOrders(url){
 function ajaxCall(url, elementId){
 	$.ajax({url: url, success: function(data, textStatus, xhr){
 			if(xhr.status == 230){
-				alert("error " + data);
 				$.toast({
 				    heading: 'Erro',
 				    text: 'Erro.' + data + '.',

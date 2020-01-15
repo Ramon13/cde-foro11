@@ -104,7 +104,7 @@ select{
 }
 
 input[type=text], input[type=password], textarea{
-  padding: 12px 0px 12px 0px;
+  padding: 7px 0px 7px 0px;
   border: 1px solid #ccc;
   border-radius: 4px;
   resize: vertical;
@@ -112,7 +112,7 @@ input[type=text], input[type=password], textarea{
 }
 
 input[type=number]{
-  padding: 12px 0px 12px 0px;
+  padding: 7px 0px 7px 0px;
   border: 1px solid #ccc;
   border-radius: 4px;
   resize: vertical;

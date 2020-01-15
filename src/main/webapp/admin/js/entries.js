@@ -1,6 +1,4 @@
-$(document).ready(function(){
-	
-});
+
 
 function callEntryItem(url, container){
 	var className = $('#' + container).attr('class');
@@ -57,5 +55,42 @@ function calcTotal(input){
 	var untValue =  $tableRow.find(".untValue").val();
 	
 	var sum = Number(amount) * Number(untValue);
+	
 	$tableRow.find(".total").val(sum);
+	
+	var inputs = $(".total");
+	var tableTotal = 0;
+	for (var i = 0 ; i < inputs.length ; i++){
+		tableTotal += Number(inputs[i].value);
+	}
+	
+	$("#totalTable").val(tableTotal);
+	$("#totalTable").show();
 }
+
+
+function addProvider(url, dialog){
+	url += "&providerDesc=" + $("#newProvider").val() + "&providerCnpj=" + $("#newCnpj").val();
+	
+	$.ajax({url: url, success: function(data, textStatus, xhr){
+		if(xhr.status == 200){
+			$.toast({
+			    heading: 'Sucesso',
+			    text: 'Fornecedor criado',
+			    allowToastClose: true,
+			    icon: 'success'
+			})
+			
+			dialog.dialog("close");
+		
+		}else if (xhr.status == 230){
+				$.toast({
+				    heading: 'Erro',
+				    text: 'Erro.' + data + '.',
+				    showHideTransition: 'fade',
+				    icon: 'error'
+				})
+		}
+	}});
+}
+

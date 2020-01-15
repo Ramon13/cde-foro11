@@ -8,10 +8,12 @@
 
 #addEntriesDiv {
     padding-top: 40px;
+    width: 80%;
 }
 
 #addEntriesTable {
     padding-top: 30px;
+    width: 100%;
 }
 
 .new-entry-btn{
@@ -34,5 +36,20 @@
 }
 
 #addEntryOptions{
-	padding-top: 40px;
+	margin-top: 100px;
+    width: 80%;
+}
+
+#totalTable{
+	float: right;
+	margin-right: 8px;
+}
+
+#providerOptions{
+	display: inline;
+}
+
+#addProviderTable{
+	text-align: center;
+	margin: auto;
 }
