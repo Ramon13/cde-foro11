@@ -33,7 +33,7 @@ public class SearchAction extends Action{
 	private void setSearchKey() throws ValidatorException{
 		String searchKey = this.request.getParameter("itemSearch");
 		
-		if(RequestParameterValidation.validateStringParam(searchKey, 32)){
+		if(!RequestParameterValidation.validateStringParam(searchKey, 32)){
 			this.filterProps.getSearchProperties().setSearchKey(searchKey);
 			request.getSession().setAttribute("filterProperties", filterProps);
 			request.getSession().setAttribute("paginationProperties", null);
@@ -44,7 +44,7 @@ public class SearchAction extends Action{
 	private void setSearchType() throws ValidatorException{
 		String searchType = this.request.getParameter("searchType");
 		
-		if(RequestParameterValidation.validateStringParam(searchType, 32)){
+		if(!RequestParameterValidation.validateStringParam(searchType, 32)){
 			for(PROPERTIES property : PROPERTIES.values()){
 				if(searchType.equalsIgnoreCase(property.toString())){
 					filterProps.getSearchProperties().setSearchType(property);

@@ -27,7 +27,7 @@ public class ListEntryItens extends AdminAction<EntryItemFilterProperties>{
 		String itemId = getRequest().getParameter("itemId");
 		String entryId = getRequest().getParameter("entryId");
 		System.out.println(entryId);
-		if(RequestParameterValidation.validateStringParam(itemId, 32)){
+		if(!RequestParameterValidation.validateStringParam(itemId, 32)){
 			
 			Long countEntries = entryItemSvc.countEntryItensByItem(Long.parseLong(itemId), entryFilterProperties);
 			PaginationProperties paginationProperties = updatePaginationStats(getRequest(), countEntries);
@@ -42,7 +42,7 @@ public class ListEntryItens extends AdminAction<EntryItemFilterProperties>{
 			getRequest().setAttribute("numOfItens", countEntries);
 				
 		}else
-			if(RequestParameterValidation.validateStringParam(entryId, 32)){
+			if(!RequestParameterValidation.validateStringParam(entryId, 32)){
 				Long countEntries = entryItemSvc.countEntryItensByEntry(Long.parseLong(entryId), entryFilterProperties);
 				PaginationProperties paginationProperties = updatePaginationStats(getRequest(), countEntries);
 				

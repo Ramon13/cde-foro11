@@ -42,7 +42,7 @@ public class FilterList extends Action {
 	private void updateProperty() throws ValidatorException{
 		String paramProperty = this.request.getParameter("property");
 		
-		if(RequestParameterValidation.validateStringParam(paramProperty, 32)){
+		if(!RequestParameterValidation.validateStringParam(paramProperty, 32)){
 			
 			Set<PROPERTIES> properties = filterProperties.getPropertiesOrderMap().keySet();
 			for(FilterProperties.PROPERTIES property : properties){
@@ -56,7 +56,7 @@ public class FilterList extends Action {
 	private void updateOrder() throws ValidatorException{
 		String paramOrder = request.getParameter("order");
 		
-		if(RequestParameterValidation.validateStringParam(paramOrder, 5)){
+		if(!RequestParameterValidation.validateStringParam(paramOrder, 5)){
 			if(paramOrder.equalsIgnoreCase(FilterProperties.ORDER.ASC.toString()))
 				filterProperties.setOrder(FilterProperties.ORDER.ASC);
 			else
@@ -68,7 +68,7 @@ public class FilterList extends Action {
 		String tagName = this.request.getParameter("tagName");
 		String[] ids = this.request.getParameterValues(tagName);
 		
-		if(RequestParameterValidation.validateStringParam(tagName, 32) && ids != null){
+		if(!RequestParameterValidation.validateStringParam(tagName, 32) && ids != null){
 			
 			Map<PROPERTIES, List<Long>> idListMap = filterProperties.getIdListMap();
 			

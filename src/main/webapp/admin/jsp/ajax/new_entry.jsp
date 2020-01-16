@@ -10,9 +10,10 @@
 <c:url value="/admin/EditProvider.action" var="editProvider">
 	<c:param name="save" value="true"/>
 </c:url>
+<c:url value="/admin/DeleteProvider.action" var="deleteProvider"/>
 
-
-<form>
+<c:url value="/admin/AddEntries.action" var="addEntries"/>
+<form id="entriesForm" action="${addEntries }">
 	<div>
 		<h2>Adicionar Entradas</h2>
 		
@@ -51,12 +52,10 @@
 									<option value="${provider.id }" label="${editProviderPage}"> ${provider.description }</option>
 								</c:forEach>
 							</select>
-							
-							<div id="addProviderBtn"><span class="ui-icon ui-icon-plus"></span></div>
-							<div id="editProviderBtn"><span class="ui-icon ui-icon-pencil"></span></div>
-							<div id="deleteProviderBtn"><span class="ui-icon ui-icon-close"></span></div>
-							
 						</div>
+						<div id="addProviderBtn"><span class="ui-icon ui-icon-plus"></span></div>
+						<div id="editProviderBtn"><span class="ui-icon ui-icon-pencil"></span></div>
+						<div id="deleteProviderBtn"><span class="ui-icon ui-icon-close"></span></div>
 					</div>
 				</td>
 			</tr>
@@ -95,28 +94,21 @@
 					</td>
 	
 					<td>
-						<input class="amount" type="number" onkeyup="calcTotal(this)" autocomplete="off"  name="amount" 
-							value="<number:format country="BR" 
-								language="pt">${requestScope.entry.amount}</number:format>" />
+						<input class="amount" type="number" onkeyup="calcTotal(this)" name="amount"/>
 					</td>
 					
 					<td>
-						<input class="untValue" onkeyup="calcTotal(this)" type="number" autocomplete="off" name="unitaryValue" 
-							value="<number:format country="BR" 
-								language="pt"> ${requestScope.entry.unityValue }</number:format>" />			
+						<input class="untValue" onkeyup="calcTotal(this)" type="number" name="unitaryValue"/>			
 					</td>
 					
 					<td>
-						<input class="total" disabled="disabled" type="text" name="total" autocomplete="off"
-							value="<number:format country="BR" 
-								language="pt">${requestScope.entry.total }</number:format>" />
+						<input class="total" disabled="disabled" type="text" name="total"/>
 					</td>
 				</tr>
 			</table>
 			
-			<input id="totalTable" hidden="hidden" disabled="disabled" type="text" name="total" autocomplete="off"
-							value="<number:format country="BR" 
-								language="pt">${requestScope.entry.total }</number:format>" />
+			<input id="totalTable" hidden="hidden" disabled="disabled" type="text" name="total"/>
+			
 		</div>
 		
 		<div id="addEntryOptions">
@@ -125,22 +117,12 @@
 			</c:url>
 			<input type="hidden" name="save" value="true"/>
 			<button type="button" class="new-entry-btn" onclick="addNewItemRow()">Adicionar Item</button>
-		    <input id="submitEntry" type="submit" value="Finalizar">
+			
+		    <button id="submitEntry" type="button" onclick="addEntries('${addEntries}')">Finalizar</button>
 		</div>	
 	</div>
 	
 </form>
-
-
- 
- <c:url value="/admin/edit_provider.action" var="editProvider"/>
- <c:url value="/admin/delete_provider.action" var="deleteProvider"/>
- 
-	
-	<input type="hidden" value="${addProvider }" id="addProviderURL">
-	<input type="hidden" value="${editProvider }" id="editProviderURL">
-	<input type="hidden" value="${deleteProvider }" id="deleteProviderURL">
-
 
 <div id="add-provider-dialog-form" title="Criar novo fornecedor">
 	  <p class="validateTips">Todos os campos são de preenchimento obrigatório.</p>
@@ -150,32 +132,50 @@
 	
 </div>	
 
-<div id="dialog-confirm" title="Deletar fornecedor">
+<div id="delete-provider-dialog" title="Deletar fornecedor">
  	<p><span class="ui-icon ui-icon-alert" style="float:left; margin:12px 12px 20px 0;"></span>Esta ação irá deletar permanentemente este fornecedor e não poderá ser desfeita, deseja continuar?</p>
 </div>
 
 
 <script>
-var addProviderDialog, editProviderDialog;
+var addProviderDialog, editProviderDialog, deleteProviderDialog;
 	$(document).ready(function(){
 		$('.js-example-basic-single').select2();
 		
 		//open provider add dialog
 		$("#addProviderBtn").on("click", function(){
 			addProviderDialog.dialog( "open" );
-			ajaxCallAppend('${addProviderPage}', "add-provider-dialog-form");
+			ajaxCall('${addProviderPage}', "add-provider-dialog-form");
 		});
 
-		//open provider add dialog
+		//open provider edit dialog
 		$("#editProviderBtn").on("click", function(){
+			var selectedVal = $('#providerList option:selected').val();
+			if (selectedVal == 0){
+				showInfoToast("Fornecedor inválido", "Selecione um fornecedor válido");
+				return;
+			}
+			
 			var url = $('#providerList option:selected').attr('label');
 			editProviderDialog.dialog( "open" );
 			ajaxCall( url, "edit-provider-dialog-form");
 		});
 		
+		$("#deleteProviderBtn").on("click", function(){
+			var selectedVal = $('#providerList option:selected').val();
+			if (selectedVal == 0){
+				showInfoToast("Fornecedor inválido", "Selecione um fornecedor válido");
+				return;
+			}
+			
+			deleteProviderDialog.dialog( "open" );
+		});
+		
+		
 		//provider add dialog
 		addProviderDialog = simpleFormDialog("add-provider-dialog-form", function(){ return addProvider('${saveProvider}', addProviderDialog);} );
 		editProviderDialog = simpleFormDialog("edit-provider-dialog-form", function(){ return editProvider('${editProvider}', editProviderDialog);} );
+		deleteProviderDialog = simpleDialogConfirmation("delete-provider-dialog", function(){ return deleteProvider('${deleteProvider}', deleteProviderDialog);} );
 		
 	});
 </script>

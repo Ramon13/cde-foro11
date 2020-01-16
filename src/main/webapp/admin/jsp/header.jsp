@@ -33,21 +33,13 @@
 	<header>
 		
 		<div id="top-menu">
-			<table id="menu-table">
-				<tr>
-					<td>
-						<h1>Controle De Estoque - Foro Da 11ª</h1>
-					</td>
-					<td>
-							<input type="text" id="searchInput" placeholder="Pesquisar item" >	
-					</td>
-					<td>
-						<select name="searchType" id="searchType">
-							
-						</select>
-					</td>
-				</tr>
-			</table>
+		
+			<div id="menu-title"><h1>Controle De Estoque - Foro Da 11ª</h1></div>
+			<div id="menu-search">
+				<input type="text" id="searchInput" placeholder="Pesquisar item" >
+				<select name="searchType" id="searchType">			
+				</select>
+			</div>
 		</div>
 	</header>
 	

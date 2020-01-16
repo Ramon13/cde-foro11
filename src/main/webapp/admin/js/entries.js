@@ -78,20 +78,9 @@ function addProvider(url, dialog){
 			showSuccessDialog("Sucesso", "Novo fornecedor criado.");
 			dialog.dialog("close");
 			
-		}else if (xhr.status == 230){
-			showErrorDialog("Erro", data);
-		}
-	}});
-}
 
-function editProvider(url, dialog){
-	url += "&providerDesc=" + $("#newProvider").val() + "&providerCnpj=" + $("#newCnpj").val();
-	
-	$.ajax({url: url, success: function(data, textStatus, xhr){
-		console.log(xhr.status);
-		if(xhr.status == 200){
-			showSuccessDialog("Sucesso", "Fornecedor modificado.");
-			dialog.dialog("close");
+			$("#providerList").html(data);
+			$('.js-example-basic-single').select2();
 			
 		}else if (xhr.status == 230){
 			showErrorDialog("Erro", data);
@@ -99,3 +88,56 @@ function editProvider(url, dialog){
 	}});
 }
 
+function editProvider(url, dialog){
+	url += "&providerId=" + $("#providerId").val() + "&providerDesc=" + $("#newProvider").val() + "&providerCnpj=" + $("#newCnpj").val();
+	
+	$.ajax({url: url, success: function(data, textStatus, xhr){
+		console.log(xhr.status);
+		if(xhr.status == 200){
+			showSuccessDialog("Sucesso", "Fornecedor modificado.");
+			dialog.dialog("close");
+			
+			$("#providerList").html(data);
+			$('.js-example-basic-single').select2();
+			
+		}else if (xhr.status == 230){
+			showErrorDialog("Erro", data);
+		}
+	}});
+}
+
+function deleteProvider(url, dialog){
+	url += "?providerId=" + $('#providerList option:selected').val();
+	console.log(url);
+	$.ajax({url: url, success: function(data, textStatus, xhr){
+		console.log(xhr.status);
+		if(xhr.status == 200){
+			showSuccessDialog("Sucesso", "Fornecedor deletado.");
+			dialog.dialog("close");
+			
+			$("#providerList").html(data);
+			$('.js-example-basic-single').select2();
+		}else if (xhr.status == 230){
+			showErrorDialog("Erro", data);
+		}
+	}});
+}
+
+function addEntries(urll){
+	
+	//e.preventDefault(); // avoid to execute the actual submit of the form.
+
+    var form = $("#entriesForm");
+    var url = form.attr('action');
+    console.log(url);
+    
+    $.ajax({
+           type: "get",
+           url: url,
+           data: form.serialize(), // serializes the form's elements.
+           success: function(data)
+           {
+               alert(); // show response from the php script.
+           }
+         });
+}

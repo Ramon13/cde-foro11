@@ -25,10 +25,10 @@ public class RequestParameterValidation extends Validator {
 	
 	public static boolean validateStringParam(String param, int maxLen) throws ValidatorException{
 		if(isEmpty(param))
-			return false;
+			return true;
 		
 		validateStringLen(param, maxLen);
-		return true;
+		return false;
 	}
 	
 	public static boolean validateLongParam(String longParam, int maxLen) throws ValidatorException{

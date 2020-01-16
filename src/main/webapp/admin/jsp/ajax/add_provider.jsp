@@ -21,7 +21,7 @@
 			</tr>
 			<tr>
 				<td>
-					<input type="hidden" name="providerId" value="${requestScope.provider.id }"/>
+					<input type="hidden" id="providerId" value="${provider.id }"/>
 					<input id="newProvider" type="text" name="providerDesc"
 						 value="${provider.description }">
 				</td>

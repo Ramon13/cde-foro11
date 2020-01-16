@@ -55,8 +55,8 @@ public class PaginationAction extends Action{
 		try {
 			String pageAction = request.getParameter("pageAction");
 			
-			if(RequestParameterValidation.validateStringParam(pageAction, 32) && 
-					RequestParameterValidation.validateStringParam(pageAction, 32)){
+			if(!RequestParameterValidation.validateStringParam(pageAction, 32) && 
+					!RequestParameterValidation.validateStringParam(pageAction, 32)){
 			
 				if(pageAction.equalsIgnoreCase(PageAction.NEXT.value))
 					updateitemOrderToNextPage(paginationSvc);

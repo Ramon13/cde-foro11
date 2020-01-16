@@ -2,9 +2,10 @@
 	overflow: hidden;
 	background-color: #002db3;
 	margin: 0;
-    padding-bottom: 10px;
 	list-style-type: none;
 	margin-bottom: 10px;
+	display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
 }
 
 #top-menu h1{
@@ -32,8 +33,5 @@
   margin-top: 3px;
   text-align: left;
   border-radius: 10px;
-}
-
-#menu-table{
-	width: 60%;
+  width: 60%;
 }

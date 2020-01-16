@@ -7,6 +7,9 @@ import br.com.javamon.dao.ProviderDAO;
 import br.com.javamon.entity.Provider;
 import br.com.javamon.exception.DAOException;
 import br.com.javamon.exception.ServiceException;
+import br.com.javamon.exception.ValidatorException;
+import br.com.javamon.validation.ProviderValidation;
+import br.com.javamon.validatior.StringValidator;
 
 public class ProviderService extends Service {
 
@@ -37,6 +40,14 @@ public class ProviderService extends Service {
 		}
 	}
 	
+	public void delete(Provider provider) throws ServiceException{
+		try {
+			getDaoFactory().getDAO(ProviderDAO.class).delete(provider);
+		} catch (DAOException e) {
+			throw new ServiceException(e);
+		}
+	}
+	
 	public List<Long> getProviderIds() throws ServiceException{
 		List<Long> providerIdList = new ArrayList<>();
 		for(Provider provider : list()){
@@ -58,6 +69,20 @@ public class ProviderService extends Service {
 			return getDaoFactory().getDAO(ProviderDAO.class).isCnpjExists(providerCnpj);
 		} catch (DAOException e) {
 			throw new ServiceException(e);
+		}
+	}
+	
+	public void editProvider(Provider newProvider, Provider oldProvider) throws ServiceException, ValidatorException{
+		ProviderValidation providerValidation = new ProviderValidation(newProvider);
+		
+		if (!StringValidator.isEqualsIgnoreCase(newProvider.getDescription(), oldProvider.getDescription())){
+			providerValidation.isDescriptionExists();
+			oldProvider.setDescription(newProvider.getDescription());
+		}
+		
+		if (!StringValidator.isEqualsIgnoreCase(newProvider.getCnpj(), oldProvider.getCnpj())){
+			providerValidation.isCnpjExists();
+			oldProvider.setCnpj(newProvider.getCnpj());
 		}
 	}
 }

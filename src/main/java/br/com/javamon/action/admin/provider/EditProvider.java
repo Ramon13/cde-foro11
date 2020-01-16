@@ -1,12 +1,9 @@
 	package br.com.javamon.action.admin.provider;
 
-import java.util.List;
-
 import org.apache.commons.lang3.StringUtils;
 
 import br.com.javamon.action.admin.AdminAction;
 import br.com.javamon.admin.domain.FilterProperties;
-import br.com.javamon.convert.Convert;
 import br.com.javamon.convert.StringConvert;
 import br.com.javamon.entity.Provider;
 import br.com.javamon.exception.ConvertException;
@@ -27,7 +24,14 @@ public class EditProvider extends AdminAction<FilterProperties>{
 		String save = getRequest().getParameter("save");
 		
 		if (!StringUtils.isBlank(save)){
-			foward("/admin/AddProvider.action");
+			ProviderService providerSvc = getServiceFactory().getService(ProviderService.class);
+			
+			Provider oldProvider = loadProvider();
+			Provider newProvider = createProvider();
+			providerSvc.editProvider(newProvider, oldProvider);
+			
+			getRequest().setAttribute("providers", providerSvc.list());
+			foward("/admin/jsp/include/add_provider_select.jsp");
 		}else {
 			Provider provider = loadProvider();
 			getRequest().setAttribute("provider", provider);
@@ -43,4 +47,17 @@ public class EditProvider extends AdminAction<FilterProperties>{
 		
 		return getServiceFactory().getService(ProviderService.class).load(providerId);
 	}
+	
+	private Provider createProvider() throws ValidatorException, ServiceException {
+		String description = getRequest().getParameter("providerDesc");
+		String cnpj = getRequest().getParameter("providerCnpj");
+		
+		Provider provider = new Provider();
+		provider.setDescription(description);
+		provider.setCnpj(cnpj);
+		
+		ProviderValidation providerValidation = new ProviderValidation(provider);
+		providerValidation.valLengthAttributes();
+		return provider;
+	}	
 }

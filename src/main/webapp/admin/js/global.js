@@ -157,6 +157,15 @@ function showErrorDialog(heading, text){
 	})
 }
 
+function showInfoToast(heading, text){
+	$.toast({
+	    heading: heading,
+	    text: text,
+	    showHideTransition: 'fade',
+	    icon: 'warning'
+	})
+}
+
 function simpleFormDialog(dialogFormId, confirmFunction){
 	var dialog = $( "#" + dialogFormId ).dialog({
 		autoOpen: false,
@@ -165,6 +174,26 @@ function simpleFormDialog(dialogFormId, confirmFunction){
 		modal: true,
 		buttons: {
 		  "Salvar": confirmFunction,
+		  
+		  "Cancelar": function() {
+		    dialog.dialog( "close" );
+		  }
+		},
+		close: function() {
+		 $("#dialog-error-msg").html(" ");
+		}
+	 });
+	return dialog;
+}
+
+function simpleDialogConfirmation(dialogDivId, confirmFunction){
+	var dialog = $( "#" + dialogDivId ).dialog({
+		autoOpen: false,
+		height: "auto",
+		width: 300,
+		modal: true,
+		buttons: {
+		  "Ok": confirmFunction,
 		  
 		  "Cancelar": function() {
 		    dialog.dialog( "close" );

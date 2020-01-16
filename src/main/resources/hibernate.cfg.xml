@@ -12,7 +12,7 @@
     </property>
     
     <property name="connection.url">
-      jdbc:mysql://localhost:3306/estoque_foro112?publicKeyRetrieval=false&amp;useTimezone=true&amp;serverTimezone=UTC
+      jdbc:mysql://localhost:3306/estoque_foro11?publicKeyRetrieval=false&amp;useTimezone=true&amp;serverTimezone=UTC
     </property>
 
     <property name="connection.username">cde_foro11</property>

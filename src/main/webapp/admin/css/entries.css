@@ -53,3 +53,7 @@
 	text-align: center;
 	margin: auto;
 }
+
+#addProviderBtn, #editProviderBtn, #deleteProviderBtn{
+	display: inline;
+}

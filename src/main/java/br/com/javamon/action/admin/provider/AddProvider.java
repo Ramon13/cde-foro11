@@ -1,7 +1,5 @@
 	package br.com.javamon.action.admin.provider;
 
-import java.util.List;
-
 import org.apache.commons.lang3.StringUtils;
 
 import br.com.javamon.action.admin.AdminAction;
@@ -24,10 +22,9 @@ public class AddProvider extends AdminAction<FilterProperties>{
 		
 		if (!StringUtils.isBlank(save)){
 			saveProvider();
-//			List<Provider> providers = getServiceFactory().getService(ProviderService.class).list();
-//			
-//			getRequest().setAttribute("providers", providers);
-//			foward("/admin/jsp/ajax/provider_list.jsp");
+			
+			getRequest().setAttribute("providers", getServiceFactory().getService(ProviderService.class).list());
+			foward("/admin/jsp/include/add_provider_select.jsp");
 		}else {
 			foward("/admin/jsp/ajax/add_provider.jsp");
 		}
