@@ -39,6 +39,21 @@ function ajaxCall(url, elementId){
 		}});
 }
 
+function ajaxCallAppend(url, elementId){
+	$.ajax({url: url, success: function(data, textStatus, xhr){
+			if(xhr.status == 230){
+				$.toast({
+				    heading: 'Erro',
+				    text: 'Erro.' + data + '.',
+				    showHideTransition: 'fade',
+				    icon: 'error'
+				})
+			}else{
+				$("#" + elementId).append(data);
+			}
+		}});
+}
+
 function filterList(url, elementClass, tagName){
 	let elementCheckArr = $(elementClass);
 	for(let i = 0 ; i < elementCheckArr.length ; i++){
@@ -122,4 +137,42 @@ function updateSearchTypeList(newTypeList, currentSearchType, currentSearchKey){
 			$("#searchType").val( v );
 		}
 	}
+}
+
+function showSuccessDialog(heading, text){
+	$.toast({
+	    heading: heading,
+	    text: text,
+	    allowToastClose: true,
+	    icon: 'success'
+	})
+}
+
+function showErrorDialog(heading, text){
+	$.toast({
+	    heading: heading,
+	    text: text,
+	    showHideTransition: 'fade',
+	    icon: 'error'
+	})
+}
+
+function simpleFormDialog(dialogFormId, confirmFunction){
+	var dialog = $( "#" + dialogFormId ).dialog({
+		autoOpen: false,
+		height: 400,
+		width: 350,
+		modal: true,
+		buttons: {
+		  "Salvar": confirmFunction,
+		  
+		  "Cancelar": function() {
+		    dialog.dialog( "close" );
+		  }
+		},
+		close: function() {
+		 $("#dialog-error-msg").html(" ");
+		}
+	 });
+	return dialog;
 }

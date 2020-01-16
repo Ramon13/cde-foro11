@@ -24,10 +24,10 @@ public class AddProvider extends AdminAction<FilterProperties>{
 		
 		if (!StringUtils.isBlank(save)){
 			saveProvider();
-			List<Provider> providers = getServiceFactory().getService(ProviderService.class).list();
-			
-			getRequest().setAttribute("providers", providers);
-			foward("/jsp/admin/provider/ajax/provider_list.jsp");	
+//			List<Provider> providers = getServiceFactory().getService(ProviderService.class).list();
+//			
+//			getRequest().setAttribute("providers", providers);
+//			foward("/admin/jsp/ajax/provider_list.jsp");
 		}else {
 			foward("/admin/jsp/ajax/add_provider.jsp");
 		}
@@ -48,7 +48,5 @@ public class AddProvider extends AdminAction<FilterProperties>{
 		
 		new ProviderValidation(provider).validateProvider();
 		return provider;
-	}
-
-	
+	}	
 }

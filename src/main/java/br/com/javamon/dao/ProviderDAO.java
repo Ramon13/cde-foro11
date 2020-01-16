@@ -19,9 +19,16 @@ public class ProviderDAO extends DAOUtil<Provider>{
 	}
 	
 	public boolean isDescriptionExists(String providerDescription) throws DAOException{
-		String hql = "from Provider p where p.description = :description";
+		String hql = "from Provider p where lower(p.description) = :description";
 		Query<Provider> query = createQuery(hql, Provider.class);
-		query.setParameter("description", providerDescription);
+		query.setParameter("description", providerDescription.toLowerCase());
+		return query.uniqueResult() != null;
+	}
+	
+	public boolean isCnpjExists(String providerCnpj) throws DAOException{
+		String hql = "from Provider p where lower(p.cnpj) = :cnpj";
+		Query<Provider> query = createQuery(hql, Provider.class);
+		query.setParameter("cnpj", providerCnpj.toLowerCase());
 		return query.uniqueResult() != null;
 	}
 }

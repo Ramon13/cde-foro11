@@ -22,12 +22,14 @@ public class ProviderValidation extends Validator{
 	}
 	
 	public void validateProvider() throws ValidatorException, ServiceException{
-		valLenDescription();
+		valLengthAttributes();
 		isDescriptionExists();
+		isCnpjExists();
 	}
 	
-	private void valLenDescription() throws ValidatorException{
-		if(!RequestParameterValidation.validateStringParam(provider.getDescription(), 64))
+	private void valLengthAttributes() throws ValidatorException{
+		if(!RequestParameterValidation.validateStringParam(provider.getDescription(), 64)
+				&& !RequestParameterValidation.validateStringParam(provider.getCnpj(), 64))
 			throw new ValidatorException("fornecedor vazio");
 	}
 	
@@ -35,5 +37,9 @@ public class ProviderValidation extends Validator{
 		if (providerSvc.isDescriptionExists(provider.getDescription()))
 			throw new ValidatorException("Este fornecedor já existe.");
 	}
-	
+
+	private void isCnpjExists() throws ValidatorException, ServiceException{
+		if (providerSvc.isCnpjExists(provider.getCnpj()))
+			throw new ValidatorException("Este CNPJ já existe.");
+	}
 }

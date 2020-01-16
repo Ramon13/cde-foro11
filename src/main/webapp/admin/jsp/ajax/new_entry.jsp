@@ -3,8 +3,11 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@taglib prefix="number" uri="/WEB-INF/number-tag.tld"%>
 
-<c:url value="/admin/AddProvider.action" var="getProviderPage"/>
+<c:url value="/admin/AddProvider.action" var="addProviderPage"/>
 <c:url value="/admin/AddProvider.action" var="saveProvider">
+	<c:param name="save" value="true"/>
+</c:url>
+<c:url value="/admin/EditProvider.action" var="editProvider">
 	<c:param name="save" value="true"/>
 </c:url>
 
@@ -39,9 +42,13 @@
 					<div id="block-container">
 						<div id="providerList" class="options" >
 							<select class="js-example-basic-single" id="providerSlct" name="providerId" >
+
 								<option value="0">Selecione</option>
-								<c:forEach var="provider" items="${providers}">	
-									<option value="${provider.id }"> ${provider.description }</option>
+								<c:forEach var="provider" items="${providers}">
+									<c:url value="/admin/EditProvider.action" var="editProviderPage">
+										<c:param name="providerId" value="${provider.id }"/>
+									</c:url>	
+									<option value="${provider.id }" label="${editProviderPage}"> ${provider.description }</option>
 								</c:forEach>
 							</select>
 							
@@ -135,45 +142,40 @@
 	<input type="hidden" value="${deleteProvider }" id="deleteProviderURL">
 
 
-<div id="dialog-form" title="Criar novo fornecedor">
+<div id="add-provider-dialog-form" title="Criar novo fornecedor">
 	  <p class="validateTips">Todos os campos são de preenchimento obrigatório.</p>
 </div>	
 
-<div id="edit-provider-dialog" title="Editar fornecedor">
-	 <div id="dialog-confirm" title="Deletar fornecedor">
-  <p><span class="ui-icon ui-icon-alert" style="float:left; margin:12px 12px 20px 0;"></span>Esta ação irá deletar permanentemente este fornecedor e não poderá ser desfeita, deseja continuar?</p>
-</div>
+<div id="edit-provider-dialog-form" title="Editar fornecedor">
+	
 </div>	
+
+<div id="dialog-confirm" title="Deletar fornecedor">
+ 	<p><span class="ui-icon ui-icon-alert" style="float:left; margin:12px 12px 20px 0;"></span>Esta ação irá deletar permanentemente este fornecedor e não poderá ser desfeita, deseja continuar?</p>
+</div>
 
 
 <script>
-var dialog;
+var addProviderDialog, editProviderDialog;
 	$(document).ready(function(){
 		$('.js-example-basic-single').select2();
 		
 		//open provider add dialog
 		$("#addProviderBtn").on("click", function(){
-			dialog.dialog( "open" );
-			ajaxCall('${getProviderPage}', "dialog-form");
+			addProviderDialog.dialog( "open" );
+			ajaxCallAppend('${addProviderPage}', "add-provider-dialog-form");
+		});
+
+		//open provider add dialog
+		$("#editProviderBtn").on("click", function(){
+			var url = $('#providerList option:selected').attr('label');
+			editProviderDialog.dialog( "open" );
+			ajaxCall( url, "edit-provider-dialog-form");
 		});
 		
 		//provider add dialog
-		dialog = $( "#dialog-form" ).dialog({
-			autoOpen: false,
-			height: 400,
-			width: 350,
-			modal: true,
-			buttons: {
-			  "Criar": function(){
-				  addProvider('${saveProvider}', dialog);
-			  },	
-			  "Cancelar": function() {
-			    dialog.dialog( "close" );
-			  }
-			},
-			close: function() {
-			 $("#dialog-error-msg").html(" ");
-			}
-		 });
+		addProviderDialog = simpleFormDialog("add-provider-dialog-form", function(){ return addProvider('${saveProvider}', addProviderDialog);} );
+		editProviderDialog = simpleFormDialog("edit-provider-dialog-form", function(){ return editProvider('${editProvider}', editProviderDialog);} );
+		
 	});
 </script>

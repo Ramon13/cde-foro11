@@ -23,7 +23,7 @@
 				<td>
 					<input type="hidden" name="providerId" value="${requestScope.provider.id }"/>
 					<input id="newProvider" type="text" name="providerDesc"
-						 value="${requestScope.provider.description }">
+						 value="${provider.description }">
 				</td>
 			</tr>
 			<tr>
@@ -34,7 +34,7 @@
 			<tr>
 				<td>
 					<input id="newCnpj" type="text" name="providerCnpj"
-						 value="${requestScope.provider.cnpj }">
+						 value="${provider.cnpj }">
 				</td>
 			</tr>
 			<!--

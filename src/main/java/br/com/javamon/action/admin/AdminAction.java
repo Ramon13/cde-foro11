@@ -37,7 +37,6 @@ public abstract class AdminAction <T extends FilterProperties> extends Action{
 			
 			History history = new History("/admin/" + splitedURI[1], getRequest().getParameterMap());
 			ah.add(history);
-			
 
 			processAction();
 		} catch (FilterException | SearchException | ServiceException| ValidatorException e) {

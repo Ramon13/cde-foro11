@@ -73,23 +73,28 @@ function addProvider(url, dialog){
 	url += "&providerDesc=" + $("#newProvider").val() + "&providerCnpj=" + $("#newCnpj").val();
 	
 	$.ajax({url: url, success: function(data, textStatus, xhr){
+		console.log(xhr.status);
 		if(xhr.status == 200){
-			$.toast({
-			    heading: 'Sucesso',
-			    text: 'Fornecedor criado',
-			    allowToastClose: true,
-			    icon: 'success'
-			})
-			
+			showSuccessDialog("Sucesso", "Novo fornecedor criado.");
 			dialog.dialog("close");
-		
+			
 		}else if (xhr.status == 230){
-				$.toast({
-				    heading: 'Erro',
-				    text: 'Erro.' + data + '.',
-				    showHideTransition: 'fade',
-				    icon: 'error'
-				})
+			showErrorDialog("Erro", data);
+		}
+	}});
+}
+
+function editProvider(url, dialog){
+	url += "&providerDesc=" + $("#newProvider").val() + "&providerCnpj=" + $("#newCnpj").val();
+	
+	$.ajax({url: url, success: function(data, textStatus, xhr){
+		console.log(xhr.status);
+		if(xhr.status == 200){
+			showSuccessDialog("Sucesso", "Fornecedor modificado.");
+			dialog.dialog("close");
+			
+		}else if (xhr.status == 230){
+			showErrorDialog("Erro", data);
 		}
 	}});
 }
