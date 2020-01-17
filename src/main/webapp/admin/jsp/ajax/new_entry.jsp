@@ -44,7 +44,7 @@
 						<div id="providerList" class="options" >
 							<select class="js-example-basic-single" id="providerSlct" name="providerId" >
 
-								<option>Selecione</option>
+								<option value="0">Selecione</option>
 								<c:forEach var="provider" items="${providers}">
 									<c:url value="/admin/EditProvider.action" var="editProviderPage">
 										<c:param name="providerId" value="${provider.id }"/>
@@ -63,48 +63,24 @@
 		
 		<div id="addEntriesDiv">
 			<table id="addEntriesTable" hidden="hidden">
-				<thead>
-					<tr>
-						<td>
-							<label for="item"> Item:</label>
-						</td>
-						<td>
-							<label for="amount"> Quantidade</label>
-						</td>
-						<td>
-							<label for="untValue"> Valor Unitário</label>
-						</td>
-						<td>
-							<label for="total"> Total (R$)</label>
-						</td>
-					</tr>
-				</thead>
 				
-				<tr class="trEntryMain" hidden="hidden">
+				<tr>
 					<td>
-						<div class="options">
-							<select class="selectMain" name="itemId" >
-								<option value="0">Selecione</option>
-								
-								<c:forEach var="item" items="${items}">	
-									<option value="${item.id }"> ${item.description }</option>
-								</c:forEach>
-							</select> 
-						</div>
+						<label for="item"> Item:</label>
 					</td>
-	
 					<td>
-						<input class="amount" type="number" onkeyup="calcTotal(this)" name="amount"/>
+						<label for="amount"> Quantidade</label>
 					</td>
-					
 					<td>
-						<input class="untValue" onkeyup="calcTotal(this)" type="number" name="unitaryValue"/>			
+						<label for="untValue"> Valor Unitário</label>
 					</td>
-					
 					<td>
-						<input class="total" disabled="disabled" type="text" name="total"/>
+						<label for="total"> Total (R$)</label>
 					</td>
 				</tr>
+				
+				
+				
 			</table>
 			
 			<input id="totalTable" hidden="hidden" disabled="disabled" type="text" name="total"/>
@@ -123,6 +99,34 @@
 	</div>
 	
 </form>
+
+<table>
+	<tr class="trEntryMain" hidden="hidden">
+		<td>
+			<div class="options">
+				<select class="selectMain" name="itemId" >
+					<option value="0">Selecione</option>
+					
+					<c:forEach var="item" items="${items}">	
+						<option value="${item.id }"> ${item.description }</option>
+					</c:forEach>
+				</select> 
+			</div>
+		</td>
+		
+		<td>
+			<input class="amount" type="number" onkeyup="calcTotal(this)" name="amount"/>
+		</td>
+		
+		<td>
+			<input class="untValue" onkeyup="calcTotal(this)" type="number" name="unitaryValue"/>			
+			</td>
+			
+			<td>
+				<input class="total" disabled="disabled" type="text" name="total"/>
+			</td>
+	</tr>
+</table>
 
 <div id="add-provider-dialog-form" title="Criar novo fornecedor">
 	  <p class="validateTips">Todos os campos são de preenchimento obrigatório.</p>
@@ -151,7 +155,7 @@ var addProviderDialog, editProviderDialog, deleteProviderDialog;
 		//open provider edit dialog
 		$("#editProviderBtn").on("click", function(){
 			var selectedVal = $('#providerList option:selected').val();
-			if (selectedVal === "Selecione"){
+			if (selectedVal == 0){
 				showInfoToast("Fornecedor inválido", "Selecione um fornecedor válido");
 				return;
 			}
@@ -163,7 +167,7 @@ var addProviderDialog, editProviderDialog, deleteProviderDialog;
 		
 		$("#deleteProviderBtn").on("click", function(){
 			var selectedVal = $('#providerList option:selected').val();
-			if (selectedVal === "Selecione"){
+			if (selectedVal == 0){
 				showInfoToast("Fornecedor inválido", "Selecione um fornecedor válido");
 				return;
 			}

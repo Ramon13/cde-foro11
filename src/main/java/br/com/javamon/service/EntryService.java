@@ -12,6 +12,14 @@ import br.com.javamon.exception.ServiceException;
 
 public class EntryService extends Service{
 
+	public void save(Entry entry) throws ServiceException{
+		try {
+			getDaoFactory().getDAO(EntryDAO.class).save(entry);
+		} catch (DAOException e) {
+			throw new ServiceException(e);
+		}
+	}
+	
 	public List<Entry> listEntriesByItem(Serializable itemId, FilterProperties filterProps, PaginationProperties paginationProps) throws ServiceException{
 		try {
 			return getDaoFactory().getDAO(EntryDAO.class).listEntriesByItem(itemId, filterProps, paginationProps);
@@ -51,4 +59,5 @@ public class EntryService extends Service{
 			throw new ServiceException(e);
 		}
 	}
+	
 }

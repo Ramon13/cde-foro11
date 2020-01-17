@@ -124,8 +124,6 @@ function deleteProvider(url, dialog){
 }
 
 function addEntries(){
-	$(".trEntryMain").remove();
-	
     var form = $("#entriesForm");
     var url = form.attr('action');
     console.log(url);

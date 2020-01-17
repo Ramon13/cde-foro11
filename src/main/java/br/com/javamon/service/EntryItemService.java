@@ -12,6 +12,14 @@ import br.com.javamon.exception.ServiceException;
 
 public class EntryItemService extends Service{
 
+	public void save(EntryItem ei) throws ServiceException{
+		try {
+			getDaoFactory().getDAO(EntryItemDAO.class).save(ei);
+		} catch (DAOException e) {
+			throw new ServiceException(e);
+		}
+	}
+	
 	public List<EntryItem> listEntryItensByItem(Serializable itemId, FilterProperties filterProps, PaginationProperties paginationProps) throws ServiceException{
 		try {
 			return getDaoFactory().getDAO(EntryItemDAO.class).listEntryItensByItem(itemId, filterProps, paginationProps);

@@ -6,30 +6,21 @@ import java.util.Set;
 
 public class Entry{
 	
+	private Long id;
+	@Deprecated
+	private Long amount = 0L;
+	@Deprecated
+	private Double unityValue = 0D;
 	@Deprecated
 	private Item item;
-	private Long id;
-	private Long amount;
+	@Deprecated
+	private Double total = 0D;
 	private LocalDate date;
-	private Locale locale;
-	private Double unityValue;
-	private Double total;
 	private Document document;
 	private Provider provider;
 	private Set<EntryItem> entryItens = new HashSet<>();
 	
-	public Double getUnityValue() {
-		return unityValue;
-	}
-	public void setUnityValue(Double unityValue) {
-		this.unityValue = unityValue;
-	}
-	public Double getTotal() {
-		return total;
-	}
-	public void setTotal(Double total) {
-		this.total = total;
-	}
+
 	public Document getDocument() {
 		return document;
 	}
@@ -54,23 +45,23 @@ public class Entry{
 	public void setId(Long id) {
 		this.id = id;
 	}
-	public Long getAmount() {
-		return amount;
-	}
-	public void setAmount(Long amount) {
-		this.amount = amount;
-	}
 	public LocalDate getDate() {
 		return date;
 	}
 	public void setDate(LocalDate date) {
 		this.date = date;
 	}
-	public Locale getLocale() {
-		return locale;
+	public Long getAmount() {
+		return amount;
 	}
-	public void setLocale(Locale locale) {
-		this.locale = locale;
+	public void setAmount(Long amount) {
+		this.amount = amount;
+	}
+	public Double getUnityValue() {
+		return unityValue;
+	}
+	public void setUnityValue(Double unityValue) {
+		this.unityValue = unityValue;
 	}
 	public Item getItem() {
 		return item;
@@ -78,12 +69,10 @@ public class Entry{
 	public void setItem(Item item) {
 		this.item = item;
 	}
-	@Override
-	public String toString() {
-		return "Entry [item=" + item + ", id=" + id + ", amount=" + amount + ", date=" + date + ", locale=" + locale
-				+ ", unityValue=" + unityValue + ", total=" + total + ", document=" + document + ", provider="
-				+ provider + ", entryItens=" + entryItens + "]";
+	public Double getTotal() {
+		return total;
 	}
-	
-	
+	public void setTotal(Double total) {
+		this.total = total;
+	}
 }

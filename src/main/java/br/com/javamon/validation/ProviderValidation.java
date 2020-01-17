@@ -29,8 +29,8 @@ public class ProviderValidation extends Validator{
 	}
 	
 	public void valLengthAttributes() throws ValidatorException{
-		if (!StringValidator.isValidLen(provider.getDescription(), 64) 
-				| !StringValidator.isValidLen(provider.getCnpj(), 64)
+		if (!StringValidator.isValidLen(64, provider.getDescription()) 
+				| !StringValidator.isValidLen(64, provider.getCnpj())
 				| StringValidator.isEmpty(provider.getDescription())
 				| StringValidator.isEmpty(provider.getCnpj())){
 			throw new ValidatorException("Fornecedor ou cnpj inválido");
@@ -45,5 +45,16 @@ public class ProviderValidation extends Validator{
 	public void isCnpjExists() throws ValidatorException, ServiceException{
 		if (providerSvc.isCnpjExists(provider.getCnpj()))
 			throw new ValidatorException("Este CNPJ já existe.");
+	}
+	
+	public static boolean isIdExists(Long id) throws ValidatorException{
+		try {
+			return ServiceFactory
+					.getInstance()
+					.getService(ProviderService.class)
+					.load(id) != null;
+		} catch (ServiceException e) {
+			throw new ValidatorException(e);
+		}
 	}
 }
