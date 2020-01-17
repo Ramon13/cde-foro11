@@ -44,7 +44,7 @@
 						<div id="providerList" class="options" >
 							<select class="js-example-basic-single" id="providerSlct" name="providerId" >
 
-								<option value="0">Selecione</option>
+								<option>Selecione</option>
 								<c:forEach var="provider" items="${providers}">
 									<c:url value="/admin/EditProvider.action" var="editProviderPage">
 										<c:param name="providerId" value="${provider.id }"/>
@@ -118,7 +118,7 @@
 			<input type="hidden" name="save" value="true"/>
 			<button type="button" class="new-entry-btn" onclick="addNewItemRow()">Adicionar Item</button>
 			
-		    <button id="submitEntry" type="button" onclick="addEntries('${addEntries}')">Finalizar</button>
+		    <button id="submitEntry" type="button" onclick="addEntries()">Finalizar</button>
 		</div>	
 	</div>
 	
@@ -151,7 +151,7 @@ var addProviderDialog, editProviderDialog, deleteProviderDialog;
 		//open provider edit dialog
 		$("#editProviderBtn").on("click", function(){
 			var selectedVal = $('#providerList option:selected').val();
-			if (selectedVal == 0){
+			if (selectedVal === "Selecione"){
 				showInfoToast("Fornecedor inválido", "Selecione um fornecedor válido");
 				return;
 			}
@@ -163,7 +163,7 @@ var addProviderDialog, editProviderDialog, deleteProviderDialog;
 		
 		$("#deleteProviderBtn").on("click", function(){
 			var selectedVal = $('#providerList option:selected').val();
-			if (selectedVal == 0){
+			if (selectedVal === "Selecione"){
 				showInfoToast("Fornecedor inválido", "Selecione um fornecedor válido");
 				return;
 			}

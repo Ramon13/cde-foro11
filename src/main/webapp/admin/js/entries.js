@@ -123,21 +123,22 @@ function deleteProvider(url, dialog){
 	}});
 }
 
-function addEntries(urll){
+function addEntries(){
+	$(".trEntryMain").remove();
 	
-	//e.preventDefault(); // avoid to execute the actual submit of the form.
-
     var form = $("#entriesForm");
     var url = form.attr('action');
     console.log(url);
     
     $.ajax({
-           type: "get",
+           type: "post",
            url: url,
            data: form.serialize(), // serializes the form's elements.
-           success: function(data)
+           success: function(data, textStatus, xhr)
            {
-               alert(); // show response from the php script.
+        	   if (xhr.status == 230){
+       			showErrorDialog("Erro", data);
+       		}
            }
          });
 }
