@@ -1,4 +1,4 @@
-package br.com.javamon.action.admin.provider;
+package br.com.javamon.action.admin.entry;
 
 import java.time.LocalDate;
 
@@ -33,13 +33,13 @@ public class AddEntries extends AdminAction<FilterProperties> {
 
 	private void saveEntry() throws ValidatorException, ServiceException{
 		Entry entry = createEntry();
-		getServiceFactory().getService(EntryService.class).save(entry);
 		
 		EntryItemService entryItemSvc = getServiceFactory().getService(EntryItemService.class);
 		for(EntryItem ei : entry.getEntryItens()){
 			entryItemSvc.save(ei);
 		}
 		
+		getServiceFactory().getService(EntryService.class).save(entry);
 	}
 
 	

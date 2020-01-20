@@ -17,6 +17,7 @@ import br.com.javamon.exception.ServiceException;
 import br.com.javamon.exception.ValidatorException;
 import br.com.javamon.service.PaginationService;
 import br.com.javamon.service.ServiceFactory;
+import br.com.javamon.util.HibernateUtil;
 import br.com.javamon.validation.RequestParameterValidation;
 
 public abstract class AdminAction <T extends FilterProperties> extends Action{
@@ -29,8 +30,6 @@ public abstract class AdminAction <T extends FilterProperties> extends Action{
 	
 	@Override
 	public void process() throws Exception {
-		try{
-			
 			ApplicationHistory ah = (ApplicationHistory) getRequest().getSession().getAttribute("history");
 		
 			String[] splitedURI = getRequest().getRequestURI().toString().split("/admin/*");
@@ -39,12 +38,6 @@ public abstract class AdminAction <T extends FilterProperties> extends Action{
 			ah.add(history);
 
 			processAction();
-		} catch (FilterException | SearchException | ServiceException| ValidatorException e) {
-			getResponse().setStatus(230);
-			getResponse().getOutputStream().print(e.getMessage());
-			e.printStackTrace();
-			return;
-		}
 	}
 
 	protected abstract void processAction() throws Exception;
