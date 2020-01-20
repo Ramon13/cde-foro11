@@ -93,7 +93,7 @@ public class LoginAction extends Action{
 			
 		}else
 			if( login.getPermission().getDescription().equals( PermissionType.USER.getValue() ) ) {
-				redirect("/cde_foro11/common/list_item.action");
+				redirect("/common/list_item.action");
 			}
 		return;
 	}

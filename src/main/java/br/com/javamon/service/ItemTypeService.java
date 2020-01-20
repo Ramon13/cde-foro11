@@ -1,5 +1,6 @@
 package br.com.javamon.service;
 
+import java.io.Serializable;
 import java.util.List;
 
 import br.com.javamon.dao.ItemTypeDAO;
@@ -12,6 +13,14 @@ public class ItemTypeService extends Service {
 	public List<ItemType> list() throws ServiceException{
 		try {
 			return getDaoFactory().getDAO(ItemTypeDAO.class).list();
+		} catch (DAOException e) {
+			throw new ServiceException(e);
+		}
+	}
+	
+	public ItemType load(Serializable id) throws ServiceException{
+		try {
+			return getDaoFactory().getDAO(ItemTypeDAO.class).load(id);
 		} catch (DAOException e) {
 			throw new ServiceException(e);
 		}

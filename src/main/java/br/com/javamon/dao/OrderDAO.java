@@ -94,4 +94,11 @@ public class OrderDAO extends DAOUtil<Order>{
 		else if(orderType == ORDER_TYPE.CANCELED_BY_USER)
 			query.setParameter("status", 'U');
 	}	
+	
+	public List<Integer> distinctOrdersYear()throws DAOException{
+		String hql = "select distinct year(o.date) from Order o";
+		
+		Query<Integer> query = createQuery(hql, Integer.class);
+		return query.list();
+	}
 }

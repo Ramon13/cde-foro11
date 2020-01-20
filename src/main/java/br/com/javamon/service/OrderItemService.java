@@ -11,6 +11,16 @@ import br.com.javamon.exception.ServiceException;
 
 public class OrderItemService extends Service{
 
+	public void save(OrderItem oi) throws ServiceException{
+		try{
+			getDaoFactory()
+			.getDAO(OrderItemDAO.class)
+			.save(oi);
+		}catch(DAOException e){
+			throw new ServiceException(e);
+		}
+	}
+	
 	public List<OrderItem> listOrderItemByItem(Long itemId, 
 			FilterProperties filterProperties, 
 			PaginationProperties paginationProps) throws ServiceException{

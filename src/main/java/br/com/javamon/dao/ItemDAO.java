@@ -6,11 +6,13 @@ import org.apache.commons.lang3.StringUtils;
 import org.hibernate.query.Query;
 
 import br.com.javamon.admin.domain.FilterProperties;
+import br.com.javamon.admin.domain.FilterProperties.PROPERTIES;
 import br.com.javamon.admin.domain.ItemFilterProperties;
 import br.com.javamon.admin.domain.PaginationProperties;
-import br.com.javamon.admin.domain.FilterProperties.PROPERTIES;
 import br.com.javamon.entity.Item;
+import br.com.javamon.entity.ItemType;
 import br.com.javamon.exception.DAOException;
+import br.com.javamon.util.SortProperty;
 
 /**
  * 
@@ -103,4 +105,67 @@ public class ItemDAO extends DAOUtil<Item>{
 		}
 		return hasSearchKey;
 	} 
+	
+	@Deprecated
+	public List<Item> filterItens(String pattern, int rowStart, int pageSize ) throws DAOException{
+		String hql = "from Item i where (lower(i.description) like :pattern or lower(i.specification) like :pattern) and i.type.id != :typeId";
+	
+		Query<Item> query = createQuery(hql, Item.class);
+		query.setParameter( "pattern", "%" + pattern + "%" );
+		query.setParameter( "typeId", 1L );
+		
+		query.setFirstResult( rowStart );
+		query.setMaxResults( pageSize ); 
+		
+		return query.list();
+	}
+	
+	@Deprecated
+	public Long countFilteredItens( String pattern ) throws DAOException{
+		String hql = "select count (i.id) from Item i where lower(i.description) like :pattern ";
+		Query<Long> query = createQuery(hql, Long.class);
+		query.setParameter( "pattern", "%" + pattern + "%" );
+		
+		return (Long) query.uniqueResult();
+	}
+	
+	@Deprecated
+	public Long countItensBySubitemType(ItemType type) throws DAOException{
+		String hql = "select count (i.id) from Item i where i.type =:type";
+		Query<Long> query = createQuery(hql, Long.class);
+		
+		query.setParameter("type", type);
+		
+		return (Long) query.uniqueResult();
+	}
+	
+	@Deprecated
+	public List<Item> paginateItemByType(ItemType itemtype, int rowStart, int pageSize) throws DAOException{
+		String hql = "from Item i where i.type = :itemType";
+		Query<Item> query = createQuery( hql, Item.class );
+		query.setParameter("itemType", itemtype);
+		query.setFirstResult( rowStart );
+		query.setMaxResults( pageSize ); 
+		
+		return query.list();
+	}
+	
+	
+	public Long countItens(SortProperty sortProperty) throws DAOException{
+		String hql = "select count (i.id) from Item i where i.type != 1 order by i." + sortProperty.getValue();
+		Query<Long> query = createQuery(hql, Long.class);
+		
+		return (Long) query.uniqueResult();
+	}
+	
+	@Deprecated
+	public List<Item> paginationList( 
+			SortProperty sortProperty, String order, int rowStart, int pageSize ) throws DAOException{
+		String hql = "from Item i where i.type.id != 1 order by i." + sortProperty.getValue() + " " + order;
+		Query<Item> query = createQuery(hql, Item.class);
+		query.setFirstResult( rowStart );
+		query.setMaxResults( pageSize ); 
+		
+		return query.list();
+	}
 }

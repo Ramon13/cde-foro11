@@ -50,4 +50,12 @@ public class OrderService extends Service{
 			throw new ServiceException(e);
 		}
 	}
+	
+	public List<Integer> distinctOrderYears() throws ServiceException{
+		try {
+			return getDaoFactory().getDAO(OrderDAO.class).distinctOrdersYear();
+		} catch (DAOException e) {
+			throw new ServiceException(e);
+		}
+	}
 }

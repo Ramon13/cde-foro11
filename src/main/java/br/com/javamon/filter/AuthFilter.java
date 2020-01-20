@@ -12,7 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import br.com.javamon.entity.Login;
 
-@WebFilter( urlPatterns = {"/admin/*"})
+@WebFilter( urlPatterns = {"/admin/*", "/common/*"})
 public class AuthFilter extends Filter{
 
 	@Override
