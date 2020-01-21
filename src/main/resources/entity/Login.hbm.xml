@@ -31,7 +31,7 @@
 			<one-to-many class="br.com.javamon.entity.Order"/>
 		</set>
 		
-		<one-to-one name="cart" class="br.com.javamon.entity.Cart"></one-to-one>
+		<one-to-one name="cart" class="br.com.javamon.entity.Cart" cascade="save-update"/>
 	</class>
 	
 </hibernate-mapping>

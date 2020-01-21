@@ -9,6 +9,9 @@
 	<class name="Cart" table="shopping_cart">
 		
 		<id name="id">
+			<generator class="foreign">
+				<param name="property">login</param>
+			</generator>
 		</id>
 			
 		<set name="cartItens" table="order_item_cart" cascade="all"
@@ -21,7 +24,7 @@
 			</many-to-many>
 		</set>
 	
-		<one-to-one name="login" class="br.com.javamon.entity.Login"></one-to-one>			
+		<one-to-one constrained="true" name="login" class="br.com.javamon.entity.Login"/>			
 	</class>
 	
 </hibernate-mapping>

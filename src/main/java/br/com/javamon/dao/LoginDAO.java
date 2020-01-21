@@ -51,4 +51,8 @@ public class LoginDAO extends DAOUtil<Login>{
 		
 		return query.uniqueResult();
 	}
+	
+	public void update(Login login) throws DAOException{
+		getSession().update(login);
+	}
 }

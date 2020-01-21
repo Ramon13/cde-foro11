@@ -26,7 +26,8 @@
 		</li>
 		
 		<li>
-			<a href="/cde_foro11/common/see_cart.action">
+			<c:url value="/common/see_cart.action" var="seeCart"></c:url>
+			<a href="${seeCart }">
 				<img class="cart-image" alt="" src="/cde_foro11/img/cart_icon.png">
 				<span id="cartAmount"></span>
 			</a>

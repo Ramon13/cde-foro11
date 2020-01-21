@@ -9,7 +9,7 @@
 		</div>
 	</footer>
 	
-	<%@include file="/js/required-js.html" %>
+	<%@include file="../js/required-js.html" %>
 	<script type="text/javascript" src="../js/global.js"></script>
 	<script type="text/javascript" src="../js/home.js"></script>
 	<script type="text/javascript" src="../js/list-itens.js"></script>

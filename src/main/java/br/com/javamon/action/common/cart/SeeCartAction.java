@@ -1,17 +1,14 @@
 package br.com.javamon.action.common.cart;
 
-import java.util.Iterator;
-
 import br.com.javamon.action.Action;
-import domain.Cart;
-import entity.Login;
-import entity.OrderItem;
-import service.ItemService;
+import br.com.javamon.entity.Cart;
+import br.com.javamon.entity.Login;
+import br.com.javamon.service.CartService;
 
 public class SeeCartAction extends Action {
 
 	@Override
-	protected void process() throws Exception {
+	public void process() throws Exception {
 //		Login userLogin = (Login) getSession().getAttribute("login");
 //		Iterator<OrderItem> iterator = userLogin.getCart().getCartItens().iterator();
 //		
@@ -19,8 +16,10 @@ public class SeeCartAction extends Action {
 //			orderItem.setItem( serviceFactory.getService(ItemService.class).loadItem(orderItem.getItemId()) );
 //		}
 //		
-		
-		foward("/jsp/common/cart.jsp");
+		Login userLogin = (Login) getRequest().getSession().getAttribute("login");
+		Cart userCart = getServiceFactory().getService(CartService.class).load(userLogin.getCart().getId());
+		getRequest().setAttribute("cart", userCart);
+		foward("/common/jsp/cart.jsp");
 	}
 
 }

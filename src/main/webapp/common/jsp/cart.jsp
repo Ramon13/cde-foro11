@@ -12,11 +12,10 @@
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 		<title>Carrinho</title>
-		<link rel="stylesheet" type='text/css' href="/cde_foro11/css/common-cart.css">
-		<link rel="stylesheet" type='text/css' href="/cde_foro11/css/common-header.css">
+		
 	</head>
 
-	<%@include file="/jsp/common/update_cart_amount.jsp" %>
+	<%@include file="update_cart_amount.jsp" %>
 	<body>
 	
 		<header>
@@ -27,7 +26,7 @@
 			<h1>Carrinho</h1>
 			
 			<c:choose>
-				<c:when test="${fn:length(sessionScope.login.cart.cartItens) eq 0 }">
+				<c:when test="${fn:length(cart.cartItens) eq 0 }">
 					<label>Seu carrinho está vazio.</label>
 				</c:when>
 				
@@ -42,7 +41,7 @@
 								<td></td>
 								<td>Quantidade</td>		
 							</tr>
-							<c:forEach items="${sessionScope.login.cart.cartItens }" var="cartItem">
+							<c:forEach items="${cart.cartItens }" var="cartItem">
 								<tr>
 									<td>
 										<c:choose>
@@ -107,6 +106,6 @@
 			</c:choose>
 		</div>		
 	</body>
-	<%@include file="/jsp/common/required_js.jsp" %>		
-	<script type="text/javascript" src="/cde_foro11/js/common-global.js"></script>
+	
+	<%@include file="footer.jsp" %>		
 </html>

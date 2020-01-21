@@ -4,8 +4,10 @@ import java.time.LocalDate;
 
 import br.com.javamon.action.Action;
 import br.com.javamon.admin.domain.ApplicationHistory;
+import br.com.javamon.entity.Cart;
 import br.com.javamon.entity.Login;
 import br.com.javamon.exception.ValidatorException;
+import br.com.javamon.service.CartService;
 import br.com.javamon.service.LoginService;
 import br.com.javamon.util.PermissionType;
 import br.com.javamon.validation.RequestParameterValidation;
@@ -93,6 +95,15 @@ public class LoginAction extends Action{
 			
 		}else
 			if( login.getPermission().getDescription().equals( PermissionType.USER.getValue() ) ) {
+				if(login.getCart() == null){
+					Cart cart = new Cart();
+					cart.setLogin(login);
+					cart = getServiceFactory().getService(CartService.class).save(cart);
+					
+					login.setCart(cart);
+					getServiceFactory().getService(LoginService.class).update(login);
+				}
+				
 				redirect("/common/list_item.action");
 			}
 		return;

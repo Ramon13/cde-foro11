@@ -54,7 +54,5 @@ public class ListItens extends Action{
 		}else{
 			foward(fowardUrl);
 		}
-		
-		return;
 	}
 }

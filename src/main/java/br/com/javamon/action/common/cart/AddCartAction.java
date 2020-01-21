@@ -50,7 +50,7 @@ public class AddCartAction extends Action {
 				userCart.getCartItens().add(orderItem);
 			}
 			
-			serviceFactory.getService(CartService.class).update(userCart);
+			getServiceFactory().getService(CartService.class).update(userCart);
 		}
 	}
 }

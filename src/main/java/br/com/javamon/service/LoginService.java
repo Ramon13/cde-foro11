@@ -56,4 +56,16 @@ public class LoginService extends Service {
 			throw new ServiceException(e);
 		}
 	}
+	
+	@Deprecated
+	public void update(Login login) throws ServiceException{
+		try {
+			getDaoFactory().getDAO(LoginDAO.class).update(login);
+		} catch (DAOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			throw new ServiceException(e);
+		}
+		
+	}
 }
