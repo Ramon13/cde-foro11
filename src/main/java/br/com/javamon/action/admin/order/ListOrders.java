@@ -32,7 +32,7 @@ public class ListOrders extends AdminAction<OrderFilterProperties>{
 		PaginationProperties paginationProps = updatePaginationStats(getRequest(), numOfOrders);
 		
 		List<Order> orders = orderService.listOrders(paginationProps, filterProperties);
-	
+		
 		getRequest().setAttribute("orders", orders);
 		getRequest().setAttribute("numOfItens", numOfOrders);
 		getRequest().setAttribute("logins", getServiceFactory().getService(LoginService.class).list());
@@ -45,7 +45,7 @@ public class ListOrders extends AdminAction<OrderFilterProperties>{
 		String orderTypeParam = getRequest().getParameter("orderType");
 		OrderFilterProperties ofp = (OrderFilterProperties) filterProperties;
 		
-		if(RequestParameterValidation.validateStringParam(orderTypeParam, 32)){
+		if(!RequestParameterValidation.validateStringParam(orderTypeParam, 32)){
 			for(ORDER_TYPE orderType : ORDER_TYPE.values()){
 				if(orderTypeParam.equalsIgnoreCase(orderType.toString()) &&
 						filterProperties instanceof OrderFilterProperties)

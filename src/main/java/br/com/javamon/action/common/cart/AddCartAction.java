@@ -27,7 +27,7 @@ public class AddCartAction extends Action {
 			long itemId = Long.parseLong(strItemId);
 			long itemAmount = Long.parseLong(strItemAmount);
 			Login userLogin = (Login) session.getAttribute("login");
-			Cart userCart = userLogin.getCart();
+			Cart userCart = getServiceFactory().getService(CartService.class).load(userLogin.getCart().getId());
 			
 			boolean newItem = true;
 			for(OrderItem orderItem : userCart.getCartItens()) {

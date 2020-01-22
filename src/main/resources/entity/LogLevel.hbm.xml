@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+      "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+          "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping package="br.com.javamon.entity">
+	<class name="LogLevel" table="log_level">
+
+		<id name="id">
+			<generator class="native"/>
+		</id>
+		
+		<property name="description" not-null="true" type="string"/>
+		
+		<set name="appLogs" table="app_log" inverse="true" lazy="true" fetch="select">
+			<key>
+				<column name="log_level" not-null="true"/>
+			</key>
+			<one-to-many class="br.com.javamon.entity.AppLog"/>
+		</set>
+	</class>
+</hibernate-mapping>  

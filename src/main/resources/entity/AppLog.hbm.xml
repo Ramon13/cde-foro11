@@ -1,0 +1,25 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+      "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+          "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping package="br.com.javamon.entity">
+	<class name="AppLog" table="app_log">
+	
+		<id name="id">
+			<generator class="native"/>
+		</id>
+		
+		<many-to-one name="logLevel" class="br.com.javamon.entity.LogLevel" fetch="select">
+			<column name="log_level" not-null="true"/>
+		</many-to-one>
+		
+		<property name="dateTime" column="data_hora" not-null="true" type="java.time.LocalDateTime"/>
+		
+		<many-to-one name="login" class="br.com.javamon.entity.Login" fetch="select">
+			<column name="login" not-null="true"/>
+		</many-to-one>
+		
+		<property name="description" type="string"/>
+	</class>
+</hibernate-mapping>        

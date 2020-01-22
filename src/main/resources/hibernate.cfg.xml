@@ -50,6 +50,9 @@
    	<mapping resource="entity/Provider.hbm.xml" />
    	<mapping resource="entity/Cart.hbm.xml" /> 
    	<mapping resource="entity/EntryItem.hbm.xml" /> 
+   	<mapping resource="entity/LogLevel.hbm.xml"/>
+   	<mapping resource="entity/AppLog.hbm.xml"/>
+   	
    	  	
   </session-factory>
 </hibernate-configuration>

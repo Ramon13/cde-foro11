@@ -22,10 +22,13 @@
 	 border: 1px solid #dddddd;
     text-align: center;
     padding-right: 8px;
-    padding-top: 70px;
     padding-bottom: 5px;
    	align-items: center;
    	text-align: center;
+}
+
+#second-table-head th{
+	padding-top: 70px;
 }
 
 #itens-table tbody:nth-child(even) {

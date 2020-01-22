@@ -58,7 +58,7 @@
 						</label>
 					</th>
 				</tr>
-				 	<tr>
+				 	<tr id="second-table-head">
 				 		<th></th>
 						<th>
 							<c:set scope="request" var="columnName" value="Código"></c:set>
