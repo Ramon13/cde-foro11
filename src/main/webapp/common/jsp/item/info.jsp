@@ -1,5 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@ page pageEncoding="UTF-8" contentType="text/html; charset=UTF-8" %>
     
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
@@ -7,7 +6,7 @@
 <%@taglib prefix="blob" uri="/WEB-INF/blob-to-string.tld"%>
 
 
-<%@include file="/jsp/common/header.jsp" %>
+<%@include file="../header.jsp" %>
 <body>
 	<div id="content">
 		
@@ -16,17 +15,19 @@
 				<c:choose>
 					<c:when test="${fn:length(item.images) gt 0 }">
 						<li>
-							<c:url value="/resources/LoadImage" var="loadImage">
-								<c:param name="imageId" value="${item.mainImage }"></c:param>
-							</c:url>
+							<c:url var="loadImage" value="/resources/LoadImage">
+					  			<c:param name="itemId" value="${item.id}"/>
+					  			<c:param name="imageId" value="${item.mainImage}"/>
+				  			</c:url>
 							<img src="${loadImage }" onclick="changeImage('${loadImage}')">
 						</li>
 						<c:forEach items="${item.images }" var="image">
 							<c:if test="${image.id ne item.mainImage }">
 								<li>
-									<c:url value="/resources/LoadImage" var="loadImage">
-										<c:param name="imageId" value="${image.id }"></c:param>
-									</c:url>
+									<c:url var="loadImage" value="/resources/LoadImage">
+							  			<c:param name="itemId" value="${item.id}"/>
+							  			<c:param name="imageId" value="${image.id}"/>
+						  			</c:url>
 									<img src="${loadImage }" onclick="changeImage('${loadImage}')">
 								</li>
 							</c:if>
@@ -41,13 +42,14 @@
 		<div id="main-image">
 			<c:choose>
 				<c:when test="${empty item.mainImage }">
-					<img class="item-image" src="/cde_foro11/img/no-image.jpg">
+					<img class="item-image" src="/common/img/no-image.jpg">
 				</c:when>
 				<c:otherwise>
-					<c:url value="/resources/LoadImage" var="loadImage">
-						<c:param name="imageId" value="${item.mainImage }"></c:param>
-					</c:url>
-					<img id="main-img" src="${loadImage }">
+					<c:url var="loadImage" value="/resources/LoadImage">
+			  			<c:param name="itemId" value="${item.id}"/>
+			  			<c:param name="imageId" value="${item.mainImage}"/>
+		  			</c:url>
+					<img src="${loadImage }" onclick="changeImage('${loadImage}')">
 				</c:otherwise>
 			</c:choose>
 		</div>
@@ -79,5 +81,5 @@
 	</div>		
 </body>
 	
-<%@include file="/jsp/common/footer.jsp" %>
+<%@include file="../footer.jsp" %>
 

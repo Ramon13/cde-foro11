@@ -3,21 +3,21 @@ package br.com.javamon.action.common.item;
 import org.apache.commons.lang3.StringUtils;
 
 import br.com.javamon.action.Action;
-import entity.Item;
-import service.ItemService;
+import br.com.javamon.entity.Item;
+import br.com.javamon.service.ItemService;
 
 public class ItemMarket extends Action{
 
 	@Override
-	protected void process() throws Exception {
+	public void process() throws Exception {
 		String strItemId = getRequest().getParameter("itemId");
 		if(!StringUtils.isBlank(strItemId)) {
-			Item item = serviceFactory.getService(ItemService.class).loadItem(strItemId);
+			Item item = getServiceFactory().getService(ItemService.class).load(Long.parseLong(strItemId));
 			
 			getRequest().setAttribute("item", item);
-			foward("/jsp/common/item/info.jsp");     
+			foward("/common/jsp/item/info.jsp");     
 		}else {
-			redirect("list_item.action");
+			redirect("/common/list_item.action");
 		}
 	}
 

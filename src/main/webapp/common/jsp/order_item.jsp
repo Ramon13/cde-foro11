@@ -4,7 +4,7 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 
-<%@include file="/jsp/common/header.jsp" %>		
+<%@include file="header.jsp" %>		
 
 <body>
 	
@@ -17,13 +17,14 @@
 				<td></td>
 				<td>Quantidade</td>
 			</tr>
-			<c:forEach items="${requestScope.orderItens}" var="orderItem">
+			<c:forEach items="${orderItens}" var="orderItem">
 				<tr>
 					<td>
 						<c:choose>
 							<c:when test="${fn:length(orderItem.item.images) ne 0}">
 								<c:url value="/resources/LoadImage" var="loadImage">
-									<c:param name="imageId" value="${orderItem.item.mainImage }"></c:param>
+									<c:param name="itemId" value="${orderItem.item.id}"/>
+									<c:param name="imageId" value="${orderItem.item.mainImage}"/>
 								</c:url>
 								<img class="cart-item-image" src="${loadImage }">
 							</c:when>
@@ -91,8 +92,4 @@
 	</div>		
 </body>
 	
-	<%@include file="/jsp/common/required_js.jsp" %>		
-	<script type="text/javascript" src="/cde_foro11/js/common-global.js"></script>		
-	<script type="text/javascript" src="/cde_foro11/js/common.js"></script>
-	<script type="text/javascript" src="/cde_foro11/js/common-home.js"></script>
-</html>
+	<%@include file="footer.jsp" %>

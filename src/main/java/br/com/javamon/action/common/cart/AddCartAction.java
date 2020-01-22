@@ -11,6 +11,7 @@ import br.com.javamon.exception.ServiceException;
 import br.com.javamon.service.CartService;
 import br.com.javamon.service.ItemService;
 import br.com.javamon.service.OrderItemService;
+import br.com.javamon.service.ServiceFactory;
 
 public class AddCartAction extends Action {
 
@@ -27,7 +28,8 @@ public class AddCartAction extends Action {
 			long itemId = Long.parseLong(strItemId);
 			long itemAmount = Long.parseLong(strItemAmount);
 			Login userLogin = (Login) session.getAttribute("login");
-			Cart userCart = getServiceFactory().getService(CartService.class).load(userLogin.getCart().getId());
+			CartService cartSvc = ServiceFactory.getInstance().getService(CartService.class);
+			Cart userCart = cartSvc.load(userLogin.getCart().getId());
 			
 			boolean newItem = true;
 			for(OrderItem orderItem : userCart.getCartItens()) {
@@ -40,17 +42,17 @@ public class AddCartAction extends Action {
 			}
 			
 			if(newItem) {
-				Item item = getServiceFactory().getService(ItemService.class).load(itemId);
+				Item item = ServiceFactory.getInstance().getService(ItemService.class).load(itemId);
 				OrderItem orderItem = new OrderItem();
 				
 				orderItem.setItem(item);
 				orderItem.setAmount(itemAmount);
-				getServiceFactory().getService(OrderItemService.class).save(orderItem);
+				ServiceFactory.getInstance().getService(OrderItemService.class).save(orderItem);
 				
 				userCart.getCartItens().add(orderItem);
 			}
 			
-			getServiceFactory().getService(CartService.class).update(userCart);
+			ServiceFactory.getInstance().getService(CartService.class).update(userCart);
 		}
 	}
 }

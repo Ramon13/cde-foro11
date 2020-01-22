@@ -5,6 +5,7 @@ import java.util.List;
 import br.com.javamon.admin.domain.FilterProperties;
 import br.com.javamon.admin.domain.PaginationProperties;
 import br.com.javamon.dao.OrderItemDAO;
+import br.com.javamon.entity.Order;
 import br.com.javamon.entity.OrderItem;
 import br.com.javamon.exception.DAOException;
 import br.com.javamon.exception.ServiceException;
@@ -55,6 +56,21 @@ public class OrderItemService extends Service{
 		try {
 			return getDaoFactory().getDAO(OrderItemDAO.class).countNumOrderItemByOrder(orderId, filterProperties);
 		} catch (DAOException e) {
+			throw new ServiceException(e);
+		}
+	}
+	
+	@Deprecated
+	public List<OrderItem> listOrderItens( String orderId ) throws ServiceException{
+		try {
+			Order order = getServiceFactory()
+					.getService(OrderService.class)
+					.loadOrder(Long.parseLong(orderId));
+			
+			return getDaoFactory()
+					.getDAO(OrderItemDAO.class)
+					.listOrderItens(order);
+		} catch (Exception e) {
 			throw new ServiceException(e);
 		}
 	}

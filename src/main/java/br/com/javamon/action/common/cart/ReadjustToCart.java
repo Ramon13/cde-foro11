@@ -15,7 +15,7 @@ public class ReadjustToCart extends Action {
 			addCartAction.addCart(getRequest().getSession(), itemList[i], amountList[i]);
 		}
 		
-		redirect("/cde_foro11/jsp/common/cart.jsp");
+		redirect("/common/jsp/cart.jsp");
 	}
 
 }

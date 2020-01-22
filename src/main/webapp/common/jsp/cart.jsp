@@ -46,12 +46,12 @@
 									<td>
 										<c:choose>
 											<c:when test="${fn:length(cartItem.item.images) ne 0}">
-												<c:url value="/resources/LoadImage" var="loadImage">
-													<c:param name="imageId" value="${cartItem.item.mainImage }"></c:param>
-												</c:url>
-												<img class="cart-item-image" src="${loadImage }">
+												<c:url var="loadImage" value="/resources/LoadImage">
+										  			<c:param name="itemId" value="${cartItem.item.id}"/>
+										  			<c:param name="imageId" value="${cartItem.item.mainImage}"/>
+									  			</c:url>
+												<img class="cart-item-image"src="${loadImage }">
 											</c:when>
-											
 											<c:otherwise>
 												<img class="cart-item-image" src="/cde_foro11/img/no-image.jpg">
 											</c:otherwise>

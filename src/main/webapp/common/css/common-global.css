@@ -1,0 +1,30 @@
+#content{
+	width: 75%;
+	margin: auto;
+}
+
+h1{
+	font-family: "Segoe UI",Arial,sans-serif;
+	font-weight: 400;
+	font-size: 25px;
+}
+
+select{
+  padding: 4px 0px 4px 0px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  resize: vertical;	
+  background-color: #ffffff;
+  color: #000000;
+  text-align: center;
+}
+
+input[type=submit] {
+    background-color: #729fcf;
+    border: none;
+    color: white;
+    padding: 10px 26px;
+    text-decoration: none;
+    margin: 4px 2px;
+    cursor: pointer;
+}

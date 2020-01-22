@@ -8,7 +8,7 @@
 	<c:param name="async" value="true"/>
 </c:url>
 
-<%@include file="/jsp/common/header.jsp" %>		
+<%@include file="header.jsp" %>		
 	
 	<body onload="loadOrderTable( '${seeItem}' )">
 		
@@ -22,4 +22,4 @@
 		
 	</body>
 	
-<%@include file="/jsp/common/footer.jsp" %>
+<%@include file="footer.jsp" %>

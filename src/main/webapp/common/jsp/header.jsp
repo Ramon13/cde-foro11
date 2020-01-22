@@ -1,3 +1,4 @@
+<%@ page pageEncoding="UTF-8" contentType="text/html; charset=UTF-8" %>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
 <!DOCTYPE html>
@@ -5,14 +6,16 @@
 <html>
 
 	<head>
-		<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-		<title>Início</title>
-		<link rel="stylesheet" href="../css/jquery-ui.css">
-	 	<link rel="stylesheet" href="../css/jquery-ui.structure.css">
-	  	<link rel="stylesheet" href="../css/jquery-ui.theme.css">
-	  	<link rel="stylesheet" href="../css/jquery.toast.css">	
-	  	<link rel="stylesheet" href="../css/select2.css">  	
-		<link rel="stylesheet" type='text/css' href="css/common-home.css">
+		<meta http-equiv="Content-Type" content="charset=UTF-8">
+		<title>InÃ­cio</title>
+		<link rel="stylesheet" href="/cde-foro11/css/jquery-ui.css">
+	 	<link rel="stylesheet" href="/cde-foro11/css/jquery-ui.structure.css">
+	  	<link rel="stylesheet" href="/cde-foro11/css/jquery-ui.theme.css">
+	  	<link rel="stylesheet" href="/cde-foro11/css/jquery.toast.css">	
+	  	<link rel="stylesheet" href="/cde-foro11/css/select2.css">  	
+		<link rel="stylesheet" type='text/css' href="/cde-foro11/common/css/common-home.css">
+		<link rel="stylesheet" type='text/css' href="/cde-foro11/common/css/common-global.css">
+		
 	</head>
 	
 <div id="menu">
@@ -21,7 +24,7 @@
 	
 	<ul>
 		<li>
-			<c:url var="logoff" value="/logoff.action"/>
+			<c:url var="logoff" value="/auth/Logoff.action"/>
 			<a href="${logoff}">Sair</a>
 		</li>
 		
@@ -41,7 +44,7 @@
 		
 		<li>
 			<c:url var="home" value="/common/list_item.action"/>
-			<a href="${home}">Início</a>
+			<a href="${home}">InÃ­cio</a>
 		</li>
 	
 	</ul>

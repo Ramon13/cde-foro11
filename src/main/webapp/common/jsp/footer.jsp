@@ -10,6 +10,6 @@
 	</footer>
 	
 	<%@include file="../js/required-js.html" %>	
-	<script type="text/javascript" src="js/common-home.js"></script>		
-	<script type="text/javascript" src="js/common-global.js"></script>
+	<script type="text/javascript" src="/cde-foro11/common/js/common-home.js"></script>		
+	<script type="text/javascript" src="/cde-foro11/common/js/common-global.js"></script>
 </html>

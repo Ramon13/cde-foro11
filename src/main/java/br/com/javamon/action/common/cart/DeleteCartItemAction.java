@@ -18,7 +18,7 @@ public class DeleteCartItemAction extends Action{
 			Long itemId = Long.parseLong(strItemId);
 			
 			Login login = (Login) getRequest().getSession().getAttribute("login");
-			Cart userCart = login.getCart();
+			Cart userCart = getServiceFactory().getService(CartService.class).load(login.getCart().getId());
 			
 			Iterator<OrderItem> userCartIterator = userCart.getCartItens().iterator();
 			while(userCartIterator.hasNext()){
@@ -31,7 +31,7 @@ public class DeleteCartItemAction extends Action{
 		
 		}
 		
-		redirect("see_cart.action");
+		redirect("/common/see_cart.action");
 	}
 
 }

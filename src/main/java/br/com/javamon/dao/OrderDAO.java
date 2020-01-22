@@ -9,6 +9,7 @@ import br.com.javamon.admin.domain.OrderFilterProperties;
 import br.com.javamon.admin.domain.PaginationProperties;
 import br.com.javamon.entity.Item;
 import br.com.javamon.entity.Locale;
+import br.com.javamon.entity.Login;
 import br.com.javamon.entity.Order;
 import br.com.javamon.entity.OrderItem;
 import br.com.javamon.exception.DAOException;
@@ -99,6 +100,34 @@ public class OrderDAO extends DAOUtil<Order>{
 		String hql = "select distinct year(o.date) from Order o";
 		
 		Query<Integer> query = createQuery(hql, Integer.class);
+		return query.list();
+	}
+	
+	@Deprecated
+	public Long countOrderByLogin( Login login ) throws DAOException {
+		String hql = "select count (o.id) from Order o where o.login = :login";
+		Query<Long> query = getSession().createQuery(hql, Long.class);
+		
+		query.setParameter("login", login);
+		
+		return (Long) query.uniqueResult();
+	}
+	
+	@Deprecated
+	public List<Order> paginateOrderByUser(Login login, int rowStart, int pageSize) throws DAOException{
+		String hql = "from Order o where o.login = :login order by o.id desc";
+		Query<Order> query = createQuery(hql, Order.class);
+		query.setParameter("login", login);
+		query.setFirstResult( rowStart );
+		query.setMaxResults( pageSize ); 
+		
+		return query.list();
+	}
+	
+	public List<Order> listOrderByLocale(Locale locale) throws DAOException{
+		String hql = "from Order o where o.login.locale =:locale";
+		Query<Order> query = createQuery(hql, Order.class);
+		query.setParameter("locale", locale);
 		return query.list();
 	}
 }

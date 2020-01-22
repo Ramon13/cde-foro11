@@ -2,7 +2,19 @@
 	
 	$('.js-example-basic-single').select2();
 	$( "#tabs" ).tabs();
+	
+	setInterval( function (){
+		checkPendingOrders( $('#pendingOrderURL').val() );
+	}, 10000);
 });
+ 
+ function checkPendingOrders( url ){
+		$.ajax({url: url, success: function(result){
+			if(result > 0){
+				$("#pendingOrder").html(result);
+		}
+	}});
+}
 
 function callNextPage(url, containerId){
 	url += "&pageAction=next";
@@ -205,3 +217,4 @@ function simpleDialogConfirmation(dialogDivId, confirmFunction){
 	 });
 	return dialog;
 }
+

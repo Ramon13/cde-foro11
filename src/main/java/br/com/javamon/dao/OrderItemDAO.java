@@ -7,6 +7,7 @@ import org.hibernate.query.Query;
 
 import br.com.javamon.admin.domain.FilterProperties;
 import br.com.javamon.admin.domain.PaginationProperties;
+import br.com.javamon.entity.Order;
 import br.com.javamon.entity.OrderItem;
 import br.com.javamon.exception.DAOException;
 
@@ -94,4 +95,13 @@ public class OrderItemDAO extends DAOUtil<OrderItem> {
 		}
 	}
 	
+	@Deprecated
+	public List<OrderItem> listOrderItens (Order order) throws DAOException{
+		String hql = "from OrderItem o where o.order = :order";
+		
+		Query<OrderItem> query = createQuery(hql, OrderItem.class);
+		query.setParameter("order", order);
+		
+		return query.list();
+	}
 }
