@@ -66,3 +66,8 @@
 	background: white;
 	color: black;
 }
+
+#numOfItems{
+	margin: 0 auto;
+    width: 0;
+}

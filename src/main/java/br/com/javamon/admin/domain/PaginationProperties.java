@@ -7,7 +7,7 @@ public class PaginationProperties {
 	private int page = 1;
 	private Long numOfItens;
 	
-	public final Integer MAX_NUM_OF_ITENS = 500; 
+	public Integer MAX_NUM_OF_ITENS = 100; 
 	/**
 	 * first value of paged list
 	 */
@@ -22,6 +22,13 @@ public class PaginationProperties {
 	private Integer lastValue;
 	
 	public PaginationProperties(){
+		this.firstValue = DEFAULT_FIRST_OCURRENCE_VALUE;
+		this.lastValue = MAX_NUM_OF_ITENS;
+	}
+	
+	
+	public PaginationProperties(Integer maxNumItems){
+		this.MAX_NUM_OF_ITENS = maxNumItems;
 		this.firstValue = DEFAULT_FIRST_OCURRENCE_VALUE;
 		this.lastValue = MAX_NUM_OF_ITENS;
 	}
@@ -68,6 +75,12 @@ public class PaginationProperties {
 		}
 	}
 	
+	public Integer getMaxNumOfItems() {
+		return MAX_NUM_OF_ITENS;
+	}
 	
+	public void setMaxNumOfItems(Integer newValue) {
+		this.MAX_NUM_OF_ITENS = newValue;
+	}
 	
 }

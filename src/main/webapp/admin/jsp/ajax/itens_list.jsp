@@ -253,6 +253,15 @@
 				</c:forEach>
 				
 			</table>
+			
+			<div id="numOfItems">
+				<select id="numItems" name="numItems">
+					<c:forEach begin="50" step="50" end="100" var="value">
+						<option value="${value}" selected="<c:if test="${value eq paginationProperties.maxNumOfItems }">'selected'</c:if>" >${value}</option>
+					</c:forEach>
+					<option value="0">Todos</option>
+				</select>
+			</div>
 		</div>
 	</c:when>
 	
@@ -294,3 +303,14 @@
 		</table>	
 	</c:otherwise>
 </c:choose>
+
+<c:url value="/admin/ChangeNumItems.action" var="changeNumItems"/>
+<script>
+	$(document).ready(function(){
+		$("#numItems").on("change", function(){
+			var selectedVal = $(this).children("option:selected").val();
+			var url = '${changeNumItems}?numItems=' + selectedVal;
+			ajaxCall(url, "content");
+		});
+	});
+</script>
