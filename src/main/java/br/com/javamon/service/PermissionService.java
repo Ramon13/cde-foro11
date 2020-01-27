@@ -1,5 +1,6 @@
 package br.com.javamon.service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import br.com.javamon.dao.PermissionDAO;
@@ -23,5 +24,13 @@ public class PermissionService extends Service{
 		} catch (DAOException e) {
 			throw new ServiceException(e);
 		}
+	}
+	
+	public List<Permission> listByLevel(Integer level) throws ServiceException{
+		List<Permission> permissions = new ArrayList<Permission>();
+		for(Permission p : list())
+			if(p.getLevel() < level)
+				permissions.add(p);
+		return permissions;
 	}
 }

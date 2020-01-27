@@ -16,6 +16,30 @@ import br.com.javamon.service.Service;
  */
 public class LocaleService extends Service{
 	
+	public void delete(Locale locale) throws ServiceException{
+		try {
+			getDaoFactory().getDAO(LocaleDAO.class).delete(locale);
+		} catch (DAOException e) {
+			throw new ServiceException(e);
+		}
+	}
+	
+	public Locale load(Long localeId) throws ServiceException{
+		try {
+			return getDaoFactory().getDAO(LocaleDAO.class).load(localeId);
+		} catch (DAOException e) {
+			throw new ServiceException(e);
+		}
+	}
+	
+	public void save(Locale locale) throws ServiceException{
+		try {
+			getDaoFactory().getDAO(LocaleDAO.class).save(locale);
+		} catch (DAOException e) {
+			throw new ServiceException(e);
+		}
+	}
+	
 	/**
 	 * List all Locales. Access the DAO layer and request a list of locales.
 	 * @return a java.util.List of locales
@@ -36,4 +60,13 @@ public class LocaleService extends Service{
 		}
 		return localeIdList;
 	}
+	
+	public Locale getLocaleByDescription(String description) throws ServiceException{
+		try {
+			return getDaoFactory().getDAO(LocaleDAO.class).getLocaleByDescription(description);
+		} catch (DAOException e) {
+			throw new ServiceException(e);
+		}
+	}
+	
 }

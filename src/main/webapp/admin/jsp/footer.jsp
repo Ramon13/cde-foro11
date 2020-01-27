@@ -16,5 +16,5 @@
 	<script type="text/javascript" src="../js/item.js"></script>
 	<script type="text/javascript" src="../js/orders.js"></script>
 	<script type="text/javascript" src="../js/entries.js"></script>
-	
+	<script type="text/javascript" src="../js/login.js"></script>
 </html>

@@ -1,10 +1,13 @@
 package br.com.javamon.service;
 
+import java.time.LocalDate;
 import java.util.List;
 
 import br.com.javamon.admin.domain.FilterProperties;
 import br.com.javamon.admin.domain.PaginationProperties;
 import br.com.javamon.dao.OrderItemDAO;
+import br.com.javamon.entity.Item;
+import br.com.javamon.entity.Locale;
 import br.com.javamon.entity.Order;
 import br.com.javamon.entity.OrderItem;
 import br.com.javamon.exception.DAOException;
@@ -71,6 +74,16 @@ public class OrderItemService extends Service{
 					.getDAO(OrderItemDAO.class)
 					.listOrderItens(order);
 		} catch (Exception e) {
+			throw new ServiceException(e);
+		}
+	}
+	
+	public Integer getSumOrderItemByLocale(Item item, Locale locale, LocalDate startDate, LocalDate finishDate) throws ServiceException{
+		try {
+			return getDaoFactory()
+			.getDAO(OrderItemDAO.class)
+			.getSumOrderItemByLocale(item, locale, startDate, finishDate);
+		} catch (DAOException e) {
 			throw new ServiceException(e);
 		}
 	}

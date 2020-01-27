@@ -6,6 +6,7 @@ import java.util.List;
 import br.com.javamon.admin.domain.FilterProperties;
 import br.com.javamon.admin.domain.PaginationProperties;
 import br.com.javamon.dao.LoginDAO;
+import br.com.javamon.entity.Locale;
 import br.com.javamon.entity.Login;
 import br.com.javamon.exception.DAOException;
 import br.com.javamon.exception.ServiceException;
@@ -67,5 +68,13 @@ public class LoginService extends Service {
 			throw new ServiceException(e);
 		}
 		
+	}
+	
+	public List<Login> listLoginsByLocale(Locale locale) throws ServiceException{
+		try{
+			return getDaoFactory().getDAO(LoginDAO.class).listLoginsByLocale(locale);
+		}catch(DAOException e){
+			throw new ServiceException(e);
+		}
 	}
 }

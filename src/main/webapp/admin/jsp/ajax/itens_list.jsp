@@ -256,10 +256,12 @@
 			
 			<div id="numOfItems">
 				<select id="numItems" name="numItems">
+					<c:set value="${paginationProperties.maxNumOfItems }" var="maxNumItems"/>
+					<c:out value="${maxNumItems }"></c:out>
 					<c:forEach begin="50" step="50" end="100" var="value">
-						<option value="${value}" selected="<c:if test="${value eq paginationProperties.maxNumOfItems }">'selected'</c:if>" >${value}</option>
+						<option value="${value}" <c:if test="${value eq maxNumItems }"> selected='selected' </c:if> >${value}</option>
 					</c:forEach>
-					<option value="0">Todos</option>
+					<option value="0" <c:if test="${maxNumItems > 100 }"> selected='selected'</c:if>>Todos</option>
 				</select>
 			</div>
 		</div>

@@ -1,6 +1,7 @@
 #logins-table{
 	height: 90vh;
 	overflow: auto;
+	clear: both;
 }
 
 #logins-table table{
@@ -33,4 +34,21 @@
 
 #logins-table table tr:nth-child(even) {
     background-color: #dddddd;
+}
+
+#addLoginTb{
+	width: 90%;
+    text-align: center;
+}
+
+#addLocaleBtn, #editLocaleBtn, #deleteLocaleBtn{
+	display: inline;
+}
+
+#editLocaleBtn{
+	
+}
+
+#deleteLocaleBtn{
+	
 }

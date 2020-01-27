@@ -1,5 +1,6 @@
 package br.com.javamon.dao;
 
+import java.time.LocalDate;
 import java.util.List;
 
 import org.apache.commons.lang3.StringUtils;
@@ -7,6 +8,8 @@ import org.hibernate.query.Query;
 
 import br.com.javamon.admin.domain.FilterProperties;
 import br.com.javamon.admin.domain.PaginationProperties;
+import br.com.javamon.entity.Item;
+import br.com.javamon.entity.Locale;
 import br.com.javamon.entity.Order;
 import br.com.javamon.entity.OrderItem;
 import br.com.javamon.exception.DAOException;
@@ -103,5 +106,19 @@ public class OrderItemDAO extends DAOUtil<OrderItem> {
 		query.setParameter("order", order);
 		
 		return query.list();
+	}
+	
+	public Integer getSumOrderItemByLocale(Item item, Locale locale, LocalDate startDate, LocalDate finishDate) throws DAOException{
+		StringBuilder hql = new StringBuilder("select sum(oi.amount) from OrderItem oi where (oi.item = :item)");
+		hql.append(" and (oi.order.login.locale = :locale");
+		hql.append(" and (oi.order.date between :startDate and :finishDate)");
+		
+		Query<Integer> query = createQuery(hql.toString(), Integer.class);
+		query.setParameter("item", item);
+		query.setParameter("locale", locale);
+		query.setParameter("startDate", startDate);
+		query.setParameter("finishDate", finishDate);
+		
+		return query.uniqueResult();
 	}
 }

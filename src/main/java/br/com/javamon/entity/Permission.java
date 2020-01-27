@@ -6,6 +6,7 @@ import java.util.Set;
 public class Permission {
 
 	private Long id;
+	private Integer level;
 	private String description;
 	private Set<Login> accounts = new HashSet<>();
 	
@@ -27,5 +28,10 @@ public class Permission {
 	public void setAccounts(Set<Login> accounts) {
 		this.accounts = accounts;
 	}
-	
+	public Integer getLevel() {
+		return level;
+	}
+	public void setLevel(Integer level) {
+		this.level = level;
+	}
 }

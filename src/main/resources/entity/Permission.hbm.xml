@@ -14,6 +14,8 @@
 		
 		<property name="description" not-null="true" unique="true"/>
 		
+		<property name="level" not-null="true" unique="true" type="integer"/>
+		
 		<set name="accounts" table="login"
 			inverse="true" lazy="true" fetch="select">
 			<key>

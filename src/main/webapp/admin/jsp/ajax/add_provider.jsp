@@ -5,7 +5,7 @@
 		
 <div>
 	<form>
-		<table  id="addProviderTable">
+		<table id="dialogTable">
 			<tr>
 				<td>
 					<c:choose>

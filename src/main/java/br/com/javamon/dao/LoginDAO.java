@@ -4,6 +4,7 @@ import java.util.List;
 import org.hibernate.query.Query;
 import br.com.javamon.admin.domain.FilterProperties;
 import br.com.javamon.admin.domain.PaginationProperties;
+import br.com.javamon.entity.Locale;
 import br.com.javamon.entity.Login;
 import br.com.javamon.exception.DAOException;
 
@@ -54,5 +55,12 @@ public class LoginDAO extends DAOUtil<Login>{
 	
 	public void update(Login login) throws DAOException{
 		getSession().update(login);
+	}
+	
+	public List<Login> listLoginsByLocale(Locale locale) throws DAOException{
+		String hql = "from Login as l where l.locale = :locale";
+		Query<Login> query = createQuery(hql, Login.class);
+		query.setParameter("locale", locale);
+		return query.list();
 	}
 }

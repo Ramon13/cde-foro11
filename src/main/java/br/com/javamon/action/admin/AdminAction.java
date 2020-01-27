@@ -1,5 +1,7 @@
 package br.com.javamon.action.admin;
 
+import java.nio.charset.StandardCharsets;
+
 import javax.servlet.http.HttpServletRequest;
 
 import br.com.javamon.action.Action;
@@ -17,7 +19,6 @@ import br.com.javamon.exception.ServiceException;
 import br.com.javamon.exception.ValidatorException;
 import br.com.javamon.service.PaginationService;
 import br.com.javamon.service.ServiceFactory;
-import br.com.javamon.util.HibernateUtil;
 import br.com.javamon.validation.RequestParameterValidation;
 
 public abstract class AdminAction <T extends FilterProperties> extends Action{
@@ -37,7 +38,12 @@ public abstract class AdminAction <T extends FilterProperties> extends Action{
 			History history = new History("/admin/" + splitedURI[1], getRequest().getParameterMap());
 			ah.add(history);
 
-			processAction();
+			try {
+				processAction();
+			} catch (ValidatorException e) {
+				getResponse().setStatus(230);
+				getResponse().getWriter().print(new String(e.getMessage().getBytes(), StandardCharsets.ISO_8859_1));
+			}
 	}
 
 	protected abstract void processAction() throws Exception;

@@ -4,6 +4,7 @@
 
 <c:url value="/admin/ListLogins.action" var="listLogins"/>
 <c:url value="/admin/ListItens.action" var="listItens"/>
+<c:url value="/admin/AddLogin.action" var="addLogin"/>
 
 <c:set scope="request" var="action" value="/admin/ListLogins.action"/>
 <c:set scope="request" var="divTabId" value="content"/>
@@ -29,13 +30,17 @@
 	    });
 	});	 
 });
+	
+	function callNewLogin(){
+		ajaxCall("${addLogin}", "tabs-2");
+	}
 </script>
 
 <div id="tabs">
 
 	<ul>
 		<li><a href="#tabs-1"><span class="ui-icon ui-icon-gear"></span>Usuários</a></li>
-		<li><a id="a-entries" onclick="callNewEntry('${addEntryURL}', 'tabs-2')" href="#tabs-2">Novo Usuário</a></li>
+		<li><a id="a-entries" onclick="callNewLogin()" href="#tabs-2">Novo Usuário</a></li>
 	</ul>
 	
 	<div id="tabs-1">	
@@ -115,4 +120,6 @@
 			</table>
 		</div>
 	</div>
+	
+	<div id="tabs-2"></div>
 </div>

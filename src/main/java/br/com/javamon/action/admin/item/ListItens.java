@@ -43,7 +43,7 @@ public class ListItens extends AdminAction<ItemFilterProperties>{
 			//identify if the user change the page and change the attributes on user session
 			Long numOfItens = itemService.countNumOfItens(itemFilterProperty);
 			PaginationProperties paginationProp = updatePaginationStats(getRequest(), numOfItens);
-			
+			System.out.println(paginationProp.getMaxNumOfItems());
 			//Search a list of Itens in database based on page and filters applied
 			List<Item> itens = itemService.listItens(paginationProp, itemFilterProperty);
 			
@@ -54,7 +54,8 @@ public class ListItens extends AdminAction<ItemFilterProperties>{
 			getRequest().setAttribute("unityTypeList", getServiceFactory().getService(UnityTypeService.class).list());
 			getRequest().setAttribute("subitemList", getServiceFactory().getService(SubitemService.class).list());
 			getRequest().setAttribute("itemTypeList", getServiceFactory().getService(ItemTypeService.class).list());
-						
+			 
+			
 			foward("/admin/jsp/ajax/itens_list.jsp");
 	}
 	
@@ -74,4 +75,36 @@ public class ListItens extends AdminAction<ItemFilterProperties>{
 			
 		}
 	}
+	
+	
+//	public /**Map<Item, Map<Locale, Integer>> */ void getSumOrderItemByLocale(List<Item> items, List<Locale> locales) throws Exception{
+//		OrderItemService OrderItemSvc = getServiceFactory().getService(OrderItemService.class);
+//		LocalDate startDate = LocalDate.of(2019, 01, 01);
+//		LocalDate finishDate = LocalDate.of(2019, 12, 31);
+//		Map<Item, Map<Locale, Integer>> itemMap = new HashMap<>();
+//		
+//		for(Item item : items){
+//			Map<Locale, Integer> localeMap = new HashMap<>();
+//			for(Locale locale : locales){
+//				Integer sum = OrderItemSvc.getSumOrderItemByLocale(item, locale, startDate, finishDate);
+//				localeMap.put(locale, sum);
+//			}
+//			itemMap.put(item, localeMap);
+//		}
+//		
+//		Set<Item> itemSet = itemMap.keySet();
+//		Iterator<Item> itemSetIterator = itemSet.iterator();
+//		while(itemSetIterator.hasNext()){
+//			Item item = itemSetIterator.next();
+//			Map<Locale, Integer> localeMap = itemMap.get(item);
+//			Set<Locale> localeSet = localeMap.keySet();
+//			lo
+//			
+//			System.out.printf("%s ", item.getDescription());
+//			System.out.printf("%s ", );
+//			
+//		}
+//	}
+	
+	
 }

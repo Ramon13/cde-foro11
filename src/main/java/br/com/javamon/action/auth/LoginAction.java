@@ -33,11 +33,11 @@ public class LoginAction extends Action{
 	private Login inputLogin() throws ValidatorException{
 		String user = getRequest().getParameter("user");
 		RequestParameterValidation.isEmpty(user);
-		RequestParameterValidation.validateStringParam(user, 8);
+		RequestParameterValidation.validateStringParam(user, 32);
 		
 		String pass = getRequest().getParameter("password");
 		RequestParameterValidation.isEmpty(user);
-		RequestParameterValidation.validateStringParam(user, 8);
+		RequestParameterValidation.validateStringParam(user, 32);
 		
 		
 		Login login = new Login();
