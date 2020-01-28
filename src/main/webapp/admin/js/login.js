@@ -48,3 +48,30 @@ function deleteLocale(url, dialog){
 		}
 	}});
 }
+
+
+function addLogin(){
+    var form = $("#loginForm");
+    var url = form.attr('action');
+    console.log(url);
+    
+    $.ajax({
+           type: "post",
+           url: url,
+           data: form.serialize(), // serializes the form's elements.
+           success: function(data, textStatus, xhr)
+           {
+	    	   if(xhr.status == 200){
+	    		   showSuccessDialog("Sucesso", "Usuário cadastrado com sucesso.");
+	    		   ajaxCall("/cde-foro11/admin/ListLogins.action?resetFilters=true", "content");
+	    	   }
+	       		else if (xhr.status == 230)
+	       			showErrorDialog("Erro", data);
+           }
+         });
+}
+
+function changeLoginProperty(url){
+	console.log(url);
+	ajaxCall(url, undefined);
+}

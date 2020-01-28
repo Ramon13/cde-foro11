@@ -12,6 +12,7 @@ public class Login {
 	private Locale locale;
 	private Permission permission;
 	private Boolean readjustToCart = false;
+	private Boolean active;
 	private Cart cart;
 	private Set<Order> orders = new HashSet<>();
 	
@@ -72,4 +73,11 @@ public class Login {
 	public String getDescription() {
 		return user;
 	}
+	public Boolean getActive() {
+		return active;
+	}
+	public void setActive(Boolean active) {
+		this.active = active;
+	}
+	
 }

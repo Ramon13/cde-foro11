@@ -1,8 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
+<c:url value="/admin/AddLogin.action" var="addLogin">
+	<c:param name="save" value="true"/>
+</c:url>
+
 <div>
-	<form>
+	<form id="loginForm" method="post" action="${addLogin}">
 		<table id="addLoginTb">
 			<tr>
 				<th>Local</th>
@@ -62,7 +66,7 @@
 			
 			<tr>
 				<td>
-					<input id="submitBtn" type="submit" value="Criar"/>
+					<button type="button" id="submitBtn" onclick="addLogin()">Criar</button>
 				</td>
 			</tr>
 		</table>

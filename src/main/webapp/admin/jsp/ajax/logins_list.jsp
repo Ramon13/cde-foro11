@@ -83,6 +83,7 @@
 						<jsp:include page="/admin/jsp/include/filter-option-filters.jsp"/>
 					</th>
 					
+					<th>Bloquear</th>
 					<th class="col-20">Re-adicionar pedidos ao carrinho</th> 
 				</tr>	
 					<c:forEach items="${logins}" var="login">
@@ -98,6 +99,16 @@
 							</td>
 							<td class="col-25">
 								<c:out value="${login.permission.description }"/>
+							</td>
+							<td>
+								<c:url var="changePermission" value="/admin/ChangePermission.action">
+									<c:param name="userId" value="${login.id }"></c:param>
+									<c:param name="action" value="block"></c:param>
+								</c:url>
+								<input onchange="changeLoginProperty('${changePermission}')" type="checkbox"
+									<c:if test="${login.active eq false }"> checked= 'checked'</c:if>
+									<c:if test="${sessionScope.login.permission.level le login.permission.level}"> disabled = 'disabled'</c:if>
+								>
 							</td>
 							<td>
 								<c:url var="loginChangePermission" value="/admin/login_change_permission.action">

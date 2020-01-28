@@ -40,6 +40,9 @@
 				<select name="searchType" id="searchType">			
 				</select>
 			</div>
+			<div id="user-profile"> 
+				<label>${login.user}</label>
+			</div>
 		</div>
 	</header>
 	

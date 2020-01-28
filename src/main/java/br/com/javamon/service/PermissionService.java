@@ -10,6 +10,14 @@ import br.com.javamon.exception.ServiceException;
 
 public class PermissionService extends Service{
 
+	public Permission load(Long id) throws ServiceException{
+		try {
+			return getDaoFactory().getDAO(PermissionDAO.class).load(id);
+		} catch (DAOException e) {
+			throw new ServiceException(e);
+		}
+	}
+	
 	public List<Permission> list() throws ServiceException{
 		try {
 			return getDaoFactory().getDAO(PermissionDAO.class).list();

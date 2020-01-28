@@ -2,8 +2,9 @@
 
 import java.time.LocalDate;
 
-import br.com.javamon.action.Action;
+import br.com.javamon.action.admin.AdminAction;
 import br.com.javamon.admin.domain.ApplicationHistory;
+import br.com.javamon.admin.domain.FilterProperties;
 import br.com.javamon.entity.Cart;
 import br.com.javamon.entity.Login;
 import br.com.javamon.exception.ValidatorException;
@@ -12,22 +13,26 @@ import br.com.javamon.service.LoginService;
 import br.com.javamon.util.PermissionType;
 import br.com.javamon.validation.RequestParameterValidation;
 
-public class LoginAction extends Action{
+public class LoginAction extends AdminAction<FilterProperties>{
+
+	public LoginAction() {
+		super(FilterProperties.class);
+	}
 
 	@Override
-	public void process() throws Exception {
+	protected void processAction() throws Exception {
+		Login login;
 		try {
-			Login login = getServiceFactory().getService(LoginService.class).login(inputLogin());
+			login = getServiceFactory().getService(LoginService.class).login(inputLogin());
 			getRequest().getSession().setAttribute("login", login);
-			
-			setCurrentDateInUserSession();
-			
-			dispatcherRequest(login);
-
 		} catch (ValidatorException e) {
-			getResponse().setStatus(230);
-			getResponse().getOutputStream().print("Usuário e/ou senha incorretos.");
+			throw new ValidatorException("Usuário e/ou senha incorretos.");
 		}	
+		
+		setCurrentDateInUserSession();
+		
+		dispatcherRequest(login);
+
 	}
 
 	private Login inputLogin() throws ValidatorException{
@@ -87,7 +92,10 @@ public class LoginAction extends Action{
 //		serviceFactory.getService(LoginService.class).update(login);
 //	}
 	
-	private void dispatcherRequest(Login login) throws Exception {
+	private void dispatcherRequest(Login login) throws Exception, ValidatorException {
+		if(!login.getActive())
+			throw new ValidatorException("Usuário bloqueado.");
+		
 		if( login.getPermission().getDescription().equals( PermissionType.ADMIN.getValue() ) 
 				|| login.getPermission().getDescription().equals( PermissionType.SUPER_ADMIN.getValue() )) {
 			getRequest().getSession().setAttribute("history", new ApplicationHistory());
@@ -106,6 +114,7 @@ public class LoginAction extends Action{
 				
 				redirect("/common/list_item.action");
 			}
+		
 		return;
 	}
 }

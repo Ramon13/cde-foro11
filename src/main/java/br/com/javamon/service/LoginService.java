@@ -13,7 +13,23 @@ import br.com.javamon.exception.ServiceException;
 import br.com.javamon.exception.ValidatorException;
 
 public class LoginService extends Service {
-
+	
+	public Login load(Long id) throws ServiceException{
+		try {
+			return getDaoFactory().getDAO(LoginDAO.class).load(id);
+		} catch (DAOException e) {
+			throw new ServiceException(e);
+		}
+	}
+	
+	public void save(Login login) throws ServiceException{
+		try {
+			getDaoFactory().getDAO(LoginDAO.class).save(login);
+		} catch (DAOException e) {
+			throw new ServiceException(e);
+		}
+	}
+	
 	public List<Login> list() throws ServiceException{
 		try {
 			return getDaoFactory().getDAO(LoginDAO.class).list();
@@ -74,6 +90,14 @@ public class LoginService extends Service {
 		try{
 			return getDaoFactory().getDAO(LoginDAO.class).listLoginsByLocale(locale);
 		}catch(DAOException e){
+			throw new ServiceException(e);
+		}
+	}
+	
+	public Login getLoginByDescription(String description) throws ServiceException{
+		try {
+			return getDaoFactory().getDAO(LoginDAO.class).getLoginByDescription(description);
+		} catch (DAOException e) {
 			throw new ServiceException(e);
 		}
 	}

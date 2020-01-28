@@ -63,4 +63,11 @@ public class LoginDAO extends DAOUtil<Login>{
 		query.setParameter("locale", locale);
 		return query.list();
 	}
+	
+	public Login getLoginByDescription(String description) throws DAOException{
+		String hql = "from Login as l where l.user = :description";
+		Query<Login> query = createQuery(hql, Login.class);
+		query.setParameter("description", description);
+		return query.uniqueResult();
+	}
 }

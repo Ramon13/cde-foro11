@@ -30,7 +30,8 @@
 						</c:url>
 						<div onclick="callMenu('${listOrdersPath}', '${divTabId}')">
 							<span></span>Pendentes
-						</div></li>
+						</div>
+					</li>
 					<li>
 						<c:url var="listOrdersPath"
 							value="/admin/ListOrders.action">
@@ -39,7 +40,8 @@
 						</c:url>
 						<div onclick="callMenu('${listOrdersPath}', '${divTabId}')">
 							<span></span>Autorizados
-						</div></li>
+						</div>
+					</li>
 					<li>
 						<c:url var="listOrdersPath"
 							value="/admin/ListOrders.action">
@@ -87,6 +89,22 @@
 				<div onclick="callMenu('${listEntriesPath}', '${divTabId}')">
 					<span class="ui-icon ui-icon-circle-arrow-s"></span>Entradas
 				</div>
+			</li>
+			
+			<li>
+				<div>Conta</div>
+				<ul>
+					<li>
+						<c:url var="listOrdersPath"
+							value="/admin/ListOrders.action">
+							<c:param name="resetFilters" value="true" />
+							<c:param name="orderType" value="pending" />
+						</c:url>
+						<div onclick="callMenu('${listOrdersPath}', '${divTabId}')">
+							<span></span>Trocar Senha
+						</div>
+					</li>
+				</ul>
 			</li>
 			<li>
 				<c:url var="logoffAction" value="/auth/Logoff.action" />

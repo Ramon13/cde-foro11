@@ -35,3 +35,15 @@
   border-radius: 10px;
   width: 60%;
 }
+
+#user-profile label{
+	font-family: "Segoe UI", Frutiger, "Frutiger Linotype", "Dejavu Sans", "Helvetica Neue", Arial, sans-serif;
+    font-size: 12px;
+    padding: 2px;
+    font-style: normal;
+    font-variant: normal;
+    font-weight: 700;
+    color: white;
+    float: right;
+    padding: 10px;
+}

@@ -18,6 +18,10 @@
 			<column name="readjust_to_cart" default="false"/>
 		</property>
 		
+		<property name="active">
+			<column name="active" default="true"/>
+		</property>
+		
 		<property name="password" not-null="true"/>
 		
 		<many-to-one name="permission" column="permission_id"/>

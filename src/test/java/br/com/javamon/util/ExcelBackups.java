@@ -45,23 +45,26 @@ public class ExcelBackups {
 		int count = 0;
 		for(String documentNumber : documents){
 			
+			Document doc = new Document();
+			doc.setNumber(documentNumber);
+			DAOFactory.getInstance().getDAO(DocumentDAO.class).save(doc);
+			
+			
 			List<Entry> entries = entrySvc.listEntriesByDocument(documentNumber);
 			Entry entry = new Entry();
 			entry.setAmount(0L);
 			entry.setDate(LocalDate.now());
 			entry.setUnityValue(0D);
 			entry.setTotal(0D);
+			entry.setDocument(doc);
 			DAOFactory.getInstance().getDAO(EntryDAO.class).save(entry);
 			
 			Set<EntryItem> entryItens = new HashSet<>();
 			
-			Document doc = new Document();
-			doc.setNumber(documentNumber);
-			DAOFactory.getInstance().getDAO(DocumentDAO.class).save(doc);
 			
 			if(entries.size() > 0 ){
 				entry.setDate(entries.get(0).getDate().plusDays(1));
-				entry.setDocument(doc);
+				
 				entry.setProvider(entries.get(0).getProvider());
 				
 				for(Entry e : entries){
