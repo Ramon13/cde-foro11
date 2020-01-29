@@ -24,6 +24,7 @@ public class LoginAction extends AdminAction<FilterProperties>{
 		Login login;
 		try {
 			login = getServiceFactory().getService(LoginService.class).login(inputLogin());
+			
 			getRequest().getSession().setAttribute("login", login);
 		} catch (ValidatorException e) {
 			throw new ValidatorException("Usuário e/ou senha incorretos.");
@@ -95,6 +96,11 @@ public class LoginAction extends AdminAction<FilterProperties>{
 	private void dispatcherRequest(Login login) throws Exception, ValidatorException {
 		if(!login.getActive())
 			throw new ValidatorException("Usuário bloqueado.");
+		
+		if(login.getResetPassword()){
+			redirect("/login/reset_login.jsp");
+			return;
+		}
 		
 		if( login.getPermission().getDescription().equals( PermissionType.ADMIN.getValue() ) 
 				|| login.getPermission().getDescription().equals( PermissionType.SUPER_ADMIN.getValue() )) {

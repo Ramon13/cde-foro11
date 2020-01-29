@@ -9,15 +9,11 @@ public class CountPendingOrders extends Action {
 
 	@Override
 	public void process() throws Exception {
-		String async = getRequest().getParameter("async");
+		Long pendingOrders = getServiceFactory().getService(OrderService.class).getPendingOrdersAmount();
+		PrintWriter pw = new PrintWriter(getResponse().getOutputStream());
+		pw.write( String.valueOf(pendingOrders));
 		
-		if(async != null) {
-			Long pendingOrders = getServiceFactory().getService(OrderService.class).getPendingOrdersAmount();
-			PrintWriter pw = new PrintWriter(getResponse().getOutputStream());
-			pw.write( String.valueOf(pendingOrders));
-			
-			pw.close();
-		}
+		pw.close();
 	}
 
 }

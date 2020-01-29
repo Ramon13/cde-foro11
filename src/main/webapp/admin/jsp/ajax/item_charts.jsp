@@ -142,6 +142,11 @@
 				</c:url>
 				
 				var url = "${loadItemCharts}" + "&chartYear=" + chartYear;
+				
+				if($("#chartContainer") != undefined){
+					$("#chartContainer").attr("id", "chartContainerUnused");
+					$("#chartContainer2").attr("id", "chartContainer2Unused");
+				}
 				ajaxCall(url, chartAppContainer);
 			});
 			

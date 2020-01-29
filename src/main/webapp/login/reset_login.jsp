@@ -16,23 +16,26 @@
 	<body>
 		<div id="content">
 		
-		<c:url var="login" value="/auth/Login.action" scope="page"/>
-		<input type="hidden" id="loginActionURL" value="${pageScope.login }">
+		<c:url var="login" value="/auth/ResetLogin.action" scope="page"/>
 		
 		<table class="login_table">
-			<tr><td>Usuário: </td></tr>
-			<tr><td> <input id="userInput" type="text" name="user" maxlength="16"/> </td></tr>
 			
-			<tr><td>Senha: </td></tr>
-			<tr><td> <input id="passwordInput" type="password" name="password" maxlength="16"/> </td></tr>
+			<tr><td>Usuário: </td></tr>
+			<tr><td> <input id="user" type="text" name="user" maxlength="16"/> </td></tr>
+			
+			<tr><td>Nova Senha: </td></tr>
+			<tr><td> <input id="password" type="password" name="password" maxlength="16"/> </td></tr>
+			
+			<tr><td>Confirmar Senha: </td></tr>
+			<tr><td> <input id="confirmPassword" type=	"password" name="confirmPassword" maxlength="16"/> </td></tr>
 			
 			<tr>	
-				<td> <button id="loginBtn" type="button" onclick="login('${login}')"> Entrar </button> </td>
+				<td> <button id="loginBtn" type="button" onclick="resetLogin('${login}')"> Entrar </button> </td>
 			</tr>
 			<tr>
 				<td> <img id="load-circle" alt="" src="../img/load_circle.gif"> </td>
+				 
 			</tr>
-			
 		</table>
 	
 		</div>
@@ -46,7 +49,7 @@
 		$(document).ready(function(){
 			$(document).on("keypress",function (e){
 				if(e.which == 13){
-					login('${login}');
+					resetLogin('${login}');
 				}
 			});
 		});

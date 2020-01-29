@@ -13,6 +13,7 @@ public class Login {
 	private Permission permission;
 	private Boolean readjustToCart = false;
 	private Boolean active;
+	private Boolean resetPassword = false;
 	private Cart cart;
 	private Set<Order> orders = new HashSet<>();
 	
@@ -79,5 +80,10 @@ public class Login {
 	public void setActive(Boolean active) {
 		this.active = active;
 	}
-	
+	public Boolean getResetPassword() {
+		return resetPassword;
+	}
+	public void setResetPassword(Boolean resetPassword) {
+		this.resetPassword = resetPassword;
+	}
 }

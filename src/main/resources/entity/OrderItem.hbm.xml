@@ -19,7 +19,7 @@
 		<many-to-one name="order" column="order_id" class="br.com.javamon.entity.Order"/>
 		
 		<set name="carts" table="order_item_cart"
-			inverse="true" lazy="true" fetch="select">
+			inverse="true" lazy="false" fetch="select">
 			<key>
 				<column name="order_item_id" not-null="true"/>
 			</key>

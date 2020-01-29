@@ -87,4 +87,21 @@ public class OrderItemService extends Service{
 			throw new ServiceException(e);
 		}
 	}
+	
+	@Deprecated
+	public void saveNewOrderItem( OrderItem orderItem, Order order ) throws Exception {	
+		orderItem.setOrder(order);
+		getServiceFactory().getService(OrderItemService.class).update(orderItem);
+	}
+	
+	@Deprecated
+	public void update(OrderItem orderItem) throws ServiceException{
+		try {
+			getDaoFactory().getDAO(OrderItemDAO.class).update(orderItem);
+		} catch (DAOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			throw new ServiceException(e);
+		}
+	}
 }

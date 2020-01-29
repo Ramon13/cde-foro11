@@ -22,6 +22,11 @@
 			<column name="active" default="true"/>
 		</property>
 		
+		<property name="resetPassword">
+			<column name="reset_password" default="false"/>
+		</property>
+		
+		
 		<property name="password" not-null="true"/>
 		
 		<many-to-one name="permission" column="permission_id"/>

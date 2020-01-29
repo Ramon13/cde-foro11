@@ -130,4 +130,13 @@ public class OrderDAO extends DAOUtil<Order>{
 		query.setParameter("locale", locale);
 		return query.list();
 	}
+	
+	@Deprecated
+	public Long getPendingOrdersAmount(){
+		String hql = "select count(o) from Order o where o.status = :status";
+		Query<Long> query = getSession().createQuery(hql, Long.class);
+		query.setParameter("status", 'P');
+		
+		return (Long) query.uniqueResult();
+	}
 }

@@ -118,19 +118,31 @@
 									<c:if test="${login.readjustToCart eq true }"> checked= 'checked'</c:if>
 								>
 							</td>
-							<td class="col-25">
-								<c:url value="/admin/delete_login.action" var="deleteLogin">
-									<c:param name="loginId" value="${login.id }"/>
+							<td>
+								<c:url value="/admin/ResetPassword.action" var="resetPass">
+									<c:param name="loginId" value="${login.id}"/>
 								</c:url>
-								<a href="#" onclick="deleteLogin('${deleteLogin}')"  class="delete-login">
-									<img src="/cde-foro11/admin/img/icons/delete_16.png">
-								</a>
+								<button id="resetPass" type="button" onclick="resetPassword('${resetPass}')"
+									<c:if test="${sessionScope.login.permission.level le login.permission.level}"> disabled = 'disabled'</c:if>
+								>resetar senha</button>
 							</td>
 						</tr>
 					</c:forEach>
 			</table>
 		</div>
+		
+		<div id="temp-pass-dialog" title="Senha Temporária">
+ 			
+		</div>
 	</div>
 	
 	<div id="tabs-2"></div>
 </div>
+
+<script>
+	var tempPassDialog
+	
+	$(document).ready(function(){
+		tempPassDialog = simpleDialogConfirmation("temp-pass-dialog", function(){ tempPassDialog.dialog("close");} );
+	});
+</script>

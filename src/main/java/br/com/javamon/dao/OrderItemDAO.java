@@ -121,4 +121,9 @@ public class OrderItemDAO extends DAOUtil<OrderItem> {
 		
 		return query.uniqueResult();
 	}
+	
+	@Deprecated
+	public void update (OrderItem orderItem) throws DAOException{
+		getSession().update(orderItem);
+	}
 }

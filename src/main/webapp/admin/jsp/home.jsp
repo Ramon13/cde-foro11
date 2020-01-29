@@ -20,7 +20,10 @@
 			</li>
 
 			<li>
-				<div>Pedidos</div>
+				<div>
+					<img class="blueBallHome" src="/cde-foro11/admin/img/png/blue_ball.png" hidden="hidden">				
+					Pedidos
+				</div>
 				<ul>
 					<li>
 						<c:url var="listOrdersPath"
@@ -29,7 +32,8 @@
 							<c:param name="orderType" value="pending" />
 						</c:url>
 						<div onclick="callMenu('${listOrdersPath}', '${divTabId}')">
-							<span></span>Pendentes
+							<img class="blueBallHome" src="/cde-foro11/admin/img/png/blue_ball.png" hidden="hidden">		
+							Pendentes
 						</div>
 					</li>
 					<li>
@@ -89,22 +93,6 @@
 				<div onclick="callMenu('${listEntriesPath}', '${divTabId}')">
 					<span class="ui-icon ui-icon-circle-arrow-s"></span>Entradas
 				</div>
-			</li>
-			
-			<li>
-				<div>Conta</div>
-				<ul>
-					<li>
-						<c:url var="listOrdersPath"
-							value="/admin/ListOrders.action">
-							<c:param name="resetFilters" value="true" />
-							<c:param name="orderType" value="pending" />
-						</c:url>
-						<div onclick="callMenu('${listOrdersPath}', '${divTabId}')">
-							<span></span>Trocar Senha
-						</div>
-					</li>
-				</ul>
 			</li>
 			<li>
 				<c:url var="logoffAction" value="/auth/Logoff.action" />

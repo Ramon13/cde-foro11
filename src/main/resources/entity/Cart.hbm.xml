@@ -15,7 +15,7 @@
 		</id>
 			
 		<set name="cartItens" table="order_item_cart" cascade="all"
-			inverse="false" lazy="true" fetch="select">
+			inverse="false" lazy="false" fetch="select">
 			<key>
 				<column name="cart_id" not-null="true"/>
 			</key>

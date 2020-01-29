@@ -75,3 +75,15 @@ function changeLoginProperty(url){
 	console.log(url);
 	ajaxCall(url, undefined);
 }
+
+function resetPassword(url){
+	$.ajax({url: url, success: function(data, textStatus, xhr){
+		if(xhr.status == 200){
+			
+			$("#temp-pass-dialog").html(data);
+			tempPassDialog.dialog( "open" );
+		}else if (xhr.status == 230){
+			showErrorDialog("Erro", data);
+		}
+	}});
+}

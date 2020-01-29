@@ -1,6 +1,7 @@
 package br.com.javamon.service;
 
 import java.io.Serializable;
+import java.time.LocalDate;
 import java.util.List;
 
 import br.com.javamon.admin.domain.FilterProperties;
@@ -17,6 +18,7 @@ import br.com.javamon.entity.OrderItem;
 import br.com.javamon.exception.ConvertException;
 import br.com.javamon.exception.DAOException;
 import br.com.javamon.exception.ServiceException;
+import br.com.javamon.util.Status;
 
 public class OrderService extends Service{
 
@@ -152,6 +154,28 @@ public class OrderService extends Service{
 	}
 	
 	public Long getPendingOrdersAmount() throws ServiceException{
-		return getOrderDAO().getPendingOrdersAmount();
+		try {
+			return getDaoFactory().getDAO(OrderDAO.class).getPendingOrdersAmount();
+		} catch (DAOException e) {
+			throw new ServiceException(e);
+		}
+	}
+	
+	@Deprecated
+	public void saveNewOrder(Login userLogin) throws ServiceException {
+		try {
+			Order order = new Order();
+			order.setDate(LocalDate.now());
+			order.setLogin(userLogin);
+			order.setStatus(Status.PENDING.getValue());
+			
+			getDaoFactory().getDAO(OrderDAO.class).save(order);
+			
+			for(OrderItem orderItem : userLogin.getCart().getCartItens()) {
+				getServiceFactory().getService(OrderItemService.class).saveNewOrderItem(orderItem, order);
+			}
+		} catch (Exception e) {
+			throw new ServiceException(e);
+		}
 	}
 }

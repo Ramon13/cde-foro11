@@ -3,14 +3,17 @@
 	$('.js-example-basic-single').select2();
 	$( "#tabs" ).tabs();
 	
+	checkPendingOrders( "/cde-foro11/admin/CountPendingOrders.action" );
 	setInterval( function (){
-		checkPendingOrders( $('#pendingOrderURL').val() );
+		checkPendingOrders( "/cde-foro11/admin/CountPendingOrders.action" );
 	}, 10000);
 });
  
  function checkPendingOrders( url ){
 		$.ajax({url: url, success: function(result){
 			if(result > 0){
+				document.title = "(" + result + ") Controle de Estoque - Foro da 11ª";
+				$(".blueBallHome").show();
 				$("#pendingOrder").html(result);
 		}
 	}});

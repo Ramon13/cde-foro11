@@ -7,7 +7,7 @@ public class PaginationProperties {
 	private int page = 1;
 	private Long numOfItens;
 	
-	public Integer MAX_NUM_OF_ITENS = 100; 
+	public Integer MAX_NUM_OF_ITENS = 50; 
 	/**
 	 * first value of paged list
 	 */

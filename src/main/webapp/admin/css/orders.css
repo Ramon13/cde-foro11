@@ -1,6 +1,7 @@
 #orders-table{
 	height: 90vh;
 	overflow: auto;
+	clear: both;
 }
 
 #orders-table table{
