@@ -139,4 +139,11 @@ public class OrderDAO extends DAOUtil<Order>{
 		
 		return (Long) query.uniqueResult();
 	}
+	
+	public List<Order> getOrdersByLocale(Locale locale) throws DAOException{
+		String hql = "from Order o where o.login.locale = :locale";
+		Query<Order> query = createQuery(hql, Order.class);
+		query.setParameter("locale", locale);
+		return query.list();
+	}
 }

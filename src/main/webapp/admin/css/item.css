@@ -39,9 +39,10 @@
     background-color: #d3d7cf;
 }
 
-#childItemOrderThead th{
+#childItemOrderThead tr th{
 	background: black;
 	color: white;
+	padding-top: 100px;
 }
 
 #childOrderTbody td{

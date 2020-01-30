@@ -1,3 +1,7 @@
+<%@page import="java.util.Locale"%>
+<%@page import="java.time.format.TextStyle"%>
+<%@page import="java.text.DateFormatSymbols"%>
+<%@page import="java.time.LocalDate"%>
 <%@page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
  <%@taglib prefix="date" uri="/WEB-INF/date-format-tag.tld"%>
@@ -78,11 +82,48 @@
 				</c:if>
 				
 				<c:if test="${entityName eq 'orderId' }">
+					
+						<tr>
+							<th></th>
+							<th></th>
+							<th></th>
+							<th></th>
+							<th></th>
+							<th colspan="12">Consumo (Ultimos 12 meses:)</th>
+						</tr>
 					<thead id="childItemOrderThead">
 						<tr>
 							<th></th>
 							<th><label>Descrição</label></th>
 							<th><label>Quantidade</label></th>
+							<th><label>Estoque Atual</label></th>
+							<th>
+								<label>
+									(${orderItens[1].order.login.locale.description }) Consumo de:
+									 <date:format country="BR" language="pt">${startDate}</date:format> 
+									até: <date:format country="BR" language="pt">${currentDate }</date:format>
+								</label>
+							</th>
+							
+							<%
+									
+									for(int i = 0; i < 12 ; i++){	
+										 LocalDate ld = LocalDate.now().minusMonths(i);
+								%>
+									<th>
+										<div class="verticalTableHeader">
+											<%= 
+												ld.getMonth().getDisplayName(TextStyle.FULL, new Locale("pt-BR"))
+											%>
+											-
+											<%=
+												ld.getYear()
+											%>
+										</div>
+									</th>
+								<%
+									}
+								%>
 						</tr>
 					</thead>
 				</c:if>
@@ -119,6 +160,59 @@
 						</td>
 						<td>${orderItem.item.description }</td>
 						<td>${orderItem.amount}</td>
+						<td>
+							<label><c:out value="${orderItem.item.currentAmount }"></c:out></label>
+						</td>
+						<td>
+							<c:set var="localeAmount" value="0" scope="page"></c:set>
+							
+							<c:forEach var="orderByLocale" items="${ordersByLocale }">
+								<c:forEach var="localeOrderItem" items="${orderByLocale.orderItens }">
+									<c:if test="${localeOrderItem.item.id eq orderItem.item.id }">
+											
+											<c:if test="${orderByLocale.status eq 70 
+												and orderByLocale.date ge startDate
+												and orderByLocale.date le currentDate }">
+												<c:set var="localeAmount" value="${localeAmount + localeOrderItem.amount}" scope="page"></c:set>
+											
+											</c:if>
+									</c:if>
+								</c:forEach>
+								
+							</c:forEach>
+							
+							<c:out value="${localeAmount }"></c:out> 
+						</td>
+						
+						<%
+									
+									for(int i = 0; i < 12 ; i++){	
+										 LocalDate ld = LocalDate.now().minusMonths(i);
+										 pageContext.setAttribute("ld", ld);
+						%>				
+									<td>
+										<c:set var="localeAmount" value="0" scope="page"></c:set>
+										<c:forEach var="orderByLocale" items="${ordersByLocale }">
+											<c:if test="${orderByLocale.date.month eq ld.month
+															and orderByLocale.date.year eq ld.year
+															and orderByLocale.status eq 70}">
+																
+												<c:forEach var="localeOrderItem" items="${orderByLocale.orderItens }">
+													<c:if test="${localeOrderItem.item.id eq orderItem.item.id }">
+															
+														<c:set var="localeAmount" value="${localeAmount + localeOrderItem.amount}" scope="page"></c:set>
+														
+													</c:if>
+												</c:forEach>
+											</c:if>
+										</c:forEach>
+									
+										<c:out value="${localeAmount }"></c:out> 
+									
+									</td>
+								<%
+									}
+								%>
 					</c:if>
 					</tr>
 				

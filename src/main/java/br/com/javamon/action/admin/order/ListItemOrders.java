@@ -6,6 +6,7 @@ import br.com.javamon.action.admin.AdminAction;
 import br.com.javamon.admin.domain.FilterProperties;
 import br.com.javamon.admin.domain.OrderItemFilterProperties;
 import br.com.javamon.admin.domain.PaginationProperties;
+import br.com.javamon.entity.Order;
 import br.com.javamon.entity.OrderItem;
 import br.com.javamon.service.OrderItemService;
 import br.com.javamon.validation.RequestParameterValidation;
@@ -57,7 +58,9 @@ public class ListItemOrders extends AdminAction<OrderItemFilterProperties>{
 		PaginationProperties paginationProperties = updatePaginationStats(getRequest(), countOrders);
 		
 		List<OrderItem> orderItens = orderItemSvc.listOrderItemByOrder(orderId, filterProperties, paginationProperties);
+		List<Order> orderByLocale = orderItemSvc.listOrdersByLocale(orderItens.get(0).getOrder().getLogin().getLocale());
 		
+		getRequest().setAttribute("ordersByLocale", orderByLocale);
 		getRequest().setAttribute("orderItens", orderItens);
 		getRequest().setAttribute("orderId", orderId);
 		getRequest().setAttribute("numOfItens", countOrders);

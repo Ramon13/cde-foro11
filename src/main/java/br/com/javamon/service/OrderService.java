@@ -10,6 +10,7 @@ import br.com.javamon.admin.domain.OrderPaginate;
 import br.com.javamon.admin.domain.PaginationProperties;
 import br.com.javamon.convert.StringConvert;
 import br.com.javamon.dao.OrderDAO;
+import br.com.javamon.entity.Cart;
 import br.com.javamon.entity.Item;
 import br.com.javamon.entity.Locale;
 import br.com.javamon.entity.Login;
@@ -162,7 +163,7 @@ public class OrderService extends Service{
 	}
 	
 	@Deprecated
-	public void saveNewOrder(Login userLogin) throws ServiceException {
+	public void saveNewOrder(Login userLogin, Cart userCart) throws ServiceException {
 		try {
 			Order order = new Order();
 			order.setDate(LocalDate.now());
@@ -171,7 +172,7 @@ public class OrderService extends Service{
 			
 			getDaoFactory().getDAO(OrderDAO.class).save(order);
 			
-			for(OrderItem orderItem : userLogin.getCart().getCartItens()) {
+			for(OrderItem orderItem : userCart.getCartItens()) {
 				getServiceFactory().getService(OrderItemService.class).saveNewOrderItem(orderItem, order);
 			}
 		} catch (Exception e) {

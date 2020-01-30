@@ -5,6 +5,7 @@ import java.util.List;
 
 import br.com.javamon.admin.domain.FilterProperties;
 import br.com.javamon.admin.domain.PaginationProperties;
+import br.com.javamon.dao.OrderDAO;
 import br.com.javamon.dao.OrderItemDAO;
 import br.com.javamon.entity.Item;
 import br.com.javamon.entity.Locale;
@@ -101,6 +102,14 @@ public class OrderItemService extends Service{
 		} catch (DAOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+			throw new ServiceException(e);
+		}
+	}
+	
+	public List<Order> listOrdersByLocale(Locale locale) throws ServiceException{
+		try {
+			return getDaoFactory().getDAO(OrderDAO.class).getOrdersByLocale(locale);
+		} catch (DAOException e) {
 			throw new ServiceException(e);
 		}
 	}

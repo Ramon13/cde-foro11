@@ -9,6 +9,7 @@ import br.com.javamon.entity.Login;
 import br.com.javamon.entity.OrderItem;
 import br.com.javamon.exception.ServiceException;
 import br.com.javamon.service.CartService;
+import br.com.javamon.service.OrderItemService;
 import br.com.javamon.service.OrderService;
 
 public class SaveOrderAction extends Action{
@@ -19,7 +20,8 @@ public class SaveOrderAction extends Action{
 		Login login = (Login) getRequest().getSession().getAttribute("login");
 		Cart userCart = login.getCart();
 		setUpdatedAmounts(userCart);
-		getServiceFactory().getService(OrderService.class).saveNewOrder(login);
+		
+		getServiceFactory().getService(OrderService.class).saveNewOrder(login, userCart);
 		clearCart(userCart);
 		
 		redirect("/common/list_item.action");
@@ -30,8 +32,9 @@ public class SaveOrderAction extends Action{
 		getServiceFactory().getService(CartService.class).update(userCart);
 	}
 	
-	private void setUpdatedAmounts(Cart userCart) {
+	private void setUpdatedAmounts(Cart userCart) throws ServiceException{
 		Map<String, String[]> parameterMap = getRequest().getParameterMap();
+		OrderItemService oiSvc = getServiceFactory().getService(OrderItemService.class);
 		
 		for(String key : parameterMap.keySet()) {
 			String[] splitedKey = key.split(":");
@@ -39,6 +42,7 @@ public class SaveOrderAction extends Action{
 				for(OrderItem orderItem : userCart.getCartItens()) {
 					if(orderItem.getItem().getId().equals(Long.parseLong(splitedKey[1]))) {
 						orderItem.setAmount(Long.parseLong(getRequest().getParameter(key)));
+						oiSvc.save(orderItem);
 					}
 				}
 			}
