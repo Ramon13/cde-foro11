@@ -81,6 +81,8 @@ public class AddLogin extends AdminAction<FilterProperties>{
 			newLogin.setPermission(permission);
 			newLogin.setPassword(strPassword);
 			newLogin.setUser(strUser);
+			newLogin.setResetPassword(true);
+			newLogin.setActive(true);
 			
 			return newLogin;
 		} catch (ConvertException | ServiceException e) {

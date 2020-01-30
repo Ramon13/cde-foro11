@@ -21,6 +21,7 @@
 
 			<li>
 				<div>
+					<span class="ui-icon ui-icon-circle-arrow-n"></span>
 					<img class="blueBallHome" src="/cde-foro11/admin/img/png/blue_ball.png" hidden="hidden">				
 					Pedidos
 				</div>
@@ -97,7 +98,7 @@
 			<li>
 				<c:url var="logoffAction" value="/auth/Logoff.action" />
 				<div onclick="logoff('${logoffAction}')">
-					<span class="ui-icon ui-icon-circle-arrow-s"></span>Sair
+					Sair
 				</div>
 			</li>
 

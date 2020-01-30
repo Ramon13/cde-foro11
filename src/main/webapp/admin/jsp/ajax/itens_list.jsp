@@ -3,6 +3,8 @@
 <%@ taglib uri = "http://java.sun.com/jsp/jstl/functions" prefix = "fn" %>
 <%@taglib prefix="date" uri="/WEB-INF/date-format-tag.tld"%>
 
+
+
 <c:url var="listItensURL" value="/admin/ListItens.action"/>
 <c:url var="loadItemPath" value="/admin/LoadItem.action"/>
 <c:url var="changeFilterDate" value="/admin/ChangeFilterDate.action" />
@@ -18,6 +20,7 @@
 
 
 <jsp:include page="/admin/jsp/include/pagination-tab.jsp"/>
+
 <div class="list-type-img">
 	<div id="grid" onclick="changeItensLayout(this, '${listItensURL}', '${divTabId }')"
 		<c:if test="${listLayout eq 'grid' }">class="selected-list-type-img"</c:if> >
@@ -56,6 +59,14 @@
 							<span>até:</span> 
 							<date:format country="BR" language="pt">${currentDate }</date:format>
 						</label>
+					</th>
+					<th>
+						<label><span>Exportar para:</span></label><br>
+						<select id="exportOptionsSlct">
+							<option value="0">selecione</option>
+							<option value="1">Excel (.xls)</option>
+							<option value="2">Pdf (.pdf)</option>
+						</select>
 					</th>
 				</tr>
 				 	<tr id="second-table-head">
@@ -313,6 +324,13 @@
 			var selectedVal = $(this).children("option:selected").val();
 			var url = '${changeNumItems}?numItems=' + selectedVal;
 			ajaxCall(url, "content");
+		});
+
+		$("#exportOptionsSlct").on("change", function(){
+			var selectedVal = $(this).children("option:selected").val();
+			if (selectedVal > 0)
+				if (selectedVal == 1)
+					 exportTableToExcel();
 		});
 	});
 </script>

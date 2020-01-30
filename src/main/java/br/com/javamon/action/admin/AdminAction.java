@@ -1,6 +1,7 @@
 package br.com.javamon.action.admin;
 
 import java.nio.charset.StandardCharsets;
+import java.util.Arrays;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -19,6 +20,7 @@ import br.com.javamon.exception.ServiceException;
 import br.com.javamon.exception.ValidatorException;
 import br.com.javamon.service.PaginationService;
 import br.com.javamon.service.ServiceFactory;
+import br.com.javamon.util.MainPages;
 import br.com.javamon.validation.RequestParameterValidation;
 
 public abstract class AdminAction <T extends FilterProperties> extends Action{
@@ -31,12 +33,19 @@ public abstract class AdminAction <T extends FilterProperties> extends Action{
 	
 	@Override
 	public void process() throws Exception {
-//			ApplicationHistory ah = (ApplicationHistory) getRequest().getSession().getAttribute("history");
-//		
-//			String[] splitedURI = getRequest().getRequestURI().toString().split("/admin/*");
-//			
-//			History history = new History("/admin/" + splitedURI[1], getRequest().getParameterMap());
-//			ah.add(history);
+			ApplicationHistory ah = (ApplicationHistory) getRequest().getSession().getAttribute("history");
+			String[] splitedURI = getRequest().getRequestURI().toString().split("/admin/*");
+			
+			if (splitedURI.length > 1) {
+				for (MainPages page : MainPages.values()) {
+					if (page.getValue().equals(splitedURI[1])) {
+						History history = new History("/admin/" + splitedURI[1], getRequest().getParameterMap());
+						ah.add(history);
+					}
+				}
+				
+			}
+			
 
 			try {
 				processAction();

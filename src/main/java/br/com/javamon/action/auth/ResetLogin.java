@@ -37,7 +37,9 @@ public class ResetLogin extends AdminAction<FilterProperties>{
 			if (login.getResetPassword()){
 				login.setPassword(strPassword);
 				login.setResetPassword(false);
-			}
+			
+			}else
+				throw new ValidatorException("Usuário inválido");
 
 			dispatcherRequest(login);
 		}

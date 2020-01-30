@@ -32,6 +32,7 @@ public class SaveOrderAction extends Action{
 	
 	private void setUpdatedAmounts(Cart userCart) {
 		Map<String, String[]> parameterMap = getRequest().getParameterMap();
+		
 		for(String key : parameterMap.keySet()) {
 			String[] splitedKey = key.split(":");
 			if(splitedKey[0].equals("itemAmount")) {

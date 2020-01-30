@@ -47,7 +47,7 @@
 			</tr>
 			
 			<tr>
-				<th>Senha</th>
+				<th>Senha temporária</th>
 			</tr>
 			<tr>
 				<td>

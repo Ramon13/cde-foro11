@@ -15,7 +15,7 @@ public class ReturnPage extends Action{
 		Stack<History> hStack = applicationHistory.getHistoryStack();
 		printStack(hStack);
 		
-		if(hStack.size() > 0){
+		if(hStack.size() > 1){
 			History topStackPage = hStack.pop();
 			topStackPage = hStack.pop();
 			
